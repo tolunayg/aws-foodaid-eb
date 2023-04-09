@@ -9,7 +9,6 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "build": "cd client && npm install && npm run build",
-    "start": "node app.js"
+    "start": "cd client && npm install --prefix ./ && npm run build --prefix ./ && cd .. && node app.js"
   }
 }
