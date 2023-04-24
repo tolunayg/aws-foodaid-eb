@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // Logout route
 app.get('/logout', (req, res) => {
   logout({
-    returnTo: 'http://localhost:5000', // Redirect after logout
+    returnTo: '/', // Redirect after logout
   })(req, res);
 });
 
