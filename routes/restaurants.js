@@ -13,7 +13,6 @@ router.use(setDatabase);
 
 const restaurantController = require('../controllers/restaurants');
 
-
 router.get('/', restaurantController.getAll);
 router.get('/:id', restaurantController.getById);
 router.post('/', restaurantController.create);

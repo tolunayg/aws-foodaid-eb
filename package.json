@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "express": "^4.18.2",
+    "express-openid-connect": "^2.15.0",
     "mongodb": "^5.2.0",
     "mongoose": "^7.0.3",
     "path": "^0.12.7"
@@ -11,7 +12,8 @@
   "scripts": {
     "start": "npm run install-client && npm run build-client && node app.js",
     "install-client": "cd client && npm install",
-    "build-client": "cd client && npm run build"
+    "build-client": "cd client && npm run build",
+    "start-app": "node app.js"
   },
   "devDependencies": {
     "typescript": "^5.0.4"

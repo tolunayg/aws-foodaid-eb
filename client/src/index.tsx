@@ -13,7 +13,7 @@ import Settings from './pages/Settings';
 const routes =
 <BrowserRouter>
   <Routes>
-    <Route path='/' element={<Login />} />
+    <Route path='/' element={<Home />} />
     <Route path='/home' element={<Home />} />
     <Route path='/dashboard' element={<Dashboard />} />
     <Route path='/profile' element={<Profile />} />
