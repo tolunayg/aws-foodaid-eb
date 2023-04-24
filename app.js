@@ -3,13 +3,13 @@ const app = express();
 const router = require('./routes/router');
 const path = require('path');
 const { auth, requiresAuth } = require('express-openid-connect');
-
+const baseUrl = process.env.REACT_APP_BASE_URL
 
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://localhost:5000',
+  baseURL: baseUrl,
   clientID: 'gsef4pIvi9zsZlM9cS6CJknDZGl4mYvI',
   issuerBaseURL: 'https://dev-h4vv57sppjqx6wf2.us.auth0.com'
 };
