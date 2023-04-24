@@ -12,8 +12,7 @@
   "scripts": {
     "start": "npm run install-client && npm run build-client && node app.js",
     "install-client": "cd client && npm install",
-    "build-client": "cd client && npm run build",
-    "start-app": "node app.js"
+    "build-client": "cd client && npm run build"
   },
   "devDependencies": {
     "typescript": "^5.0.4"
