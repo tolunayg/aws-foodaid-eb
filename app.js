@@ -1,9 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const router = require('./routes/router');
 const path = require('path');
 const { auth, requiresAuth } = require('express-openid-connect');
 const baseUrl = process.env.REACT_APP_BASE_URL
+
+console.log(baseUrl);
 
 const config = {
   authRequired: false,
