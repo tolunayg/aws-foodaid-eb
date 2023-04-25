@@ -13,8 +13,8 @@ const config = {
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
   baseURL: baseUrl,
-  clientID: 'gsef4pIvi9zsZlM9cS6CJknDZGl4mYvI',
-  issuerBaseURL: 'https://dev-h4vv57sppjqx6wf2.us.auth0.com'
+  clientID: 'KGW6SDS3zMrecFa5XX3XnJjUoTIszDWu',
+  issuerBaseURL: 'https://fars-metu.eu.auth0.com'
 };
 
 app.use(express.json()); // Parse JSON data from requests
