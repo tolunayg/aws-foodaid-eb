@@ -6,7 +6,7 @@ const path = require('path');
 const { auth, requiresAuth } = require('express-openid-connect');
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-console.log(baseUrl);
+console.log("baseUrl= " + baseUrl);
 
 const config = {
   authRequired: false,
