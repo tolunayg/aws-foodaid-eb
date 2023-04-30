@@ -5,7 +5,7 @@ const uri = config.database.uri;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const dbName = "sample_restaurants"
+const dbName = config.database.dbName
 
 async function connect() {
   try {

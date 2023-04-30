@@ -2,14 +2,6 @@ const { client, getDb } = require('../../repository/config/mongodb');
 const express = require('express');
 const router = express.Router();
 
-// // Define a middleware function to set the database connection
-// const setDatabase = (req, res, next) => {
-//     req.db = getDb('sample_restaurants'); // Specify the database name here
-//     next();
-// }
-// // Attach the middleware function to the router
-// router.use(setDatabase);
-
 const restaurantController = require('../controllers/restaurants');
 
 router.get('/', restaurantController.getAll);
