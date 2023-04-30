@@ -4,7 +4,7 @@ const restaurantRoutes = require('./restaurants');
 const productRoutes = require('./products');
 
 // Attach the middleware function to the router
-// router.use(setUser);
+router.use(setUser);
 
 // Mount your route files to the router object
 router.use('/restaurants', restaurantRoutes);
