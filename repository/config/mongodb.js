@@ -1,8 +1,11 @@
 const { MongoClient } = require('mongodb');
+const config = require('../../configs.json')
 
-const uri = "mongodb+srv://fars_user:1chQSlWjjCLMHgOc@cluster0.skrc6yu.mongodb.net/";
+const uri = config.database.uri;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const dbName = "sample_restaurants"
 
 async function connect() {
   try {
@@ -14,8 +17,8 @@ async function connect() {
   }
 }
 
-function getDb(restaurant_name) {
-    return client.db('sample_restaurants');
+function getDb() {
+  return client.db(dbName);
 }
 
-module.exports = { client, connect, getDb  };
+module.exports = { getDb };
