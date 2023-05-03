@@ -21,38 +21,6 @@ const checkJwt = oauth2.auth({
   issuerBaseURL: `https://fars-metu.eu.auth0.com`,
 });
 
-/**
- * Postman'den atilan istekler uygulamaya dusmuyor, sanirim CORS policy ile ilgiliymis bu denemeleri yaptim, cozemedim
- */
-
-/* 1. deneme */
-// // Add the following lines to configure CORS:
-// const cors = require('cors');
-// const corsOptions = {
-//   // origin: process.env.REACT_APP_BASE_URL, // This should be the URL of your React app
-//   origin: "http://localhost:5000",
-//   optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
-
-
-/* 2. deneme */
-// app.use(function (req, res, next) {
-  
-//   // Request methods, headers you wish to allow
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000')
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, x-access-token')
-  
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   res.setHeader('Access-Control-Allow-Credentials', true)
-  
-//   // Pass to next layer of middleware
-//   next();
-// });
-
-
 app.use(express.json()); // Parse JSON data from requests
 
 app.use(openid.auth(config));
