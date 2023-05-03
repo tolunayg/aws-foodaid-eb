@@ -4,9 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { URLEnum } from '../RouterEnum'
 // import { getUserActiveRole } from '../util'
 
-// import './Navbar.css';
 import './MainLayout.css';
-// import './Sidebar.css';
 
 function MainLayout(item: { token?: string, username?: string, component: JSX.Element }) {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
@@ -39,7 +37,7 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
     }
 
     const handleWindowResize = () => {
-        setIsSidebarExpanded(window.innerWidth >= 1171);
+        setIsSidebarExpanded(window.innerWidth >= 768);
     };
 
     useEffect(() => {
@@ -47,7 +45,7 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
         window.addEventListener("resize", handleWindowResize);
 
         // Initialize sidebar state based on window width
-        setIsSidebarExpanded(window.innerWidth >= 1171);
+        setIsSidebarExpanded(window.innerWidth >= 768);
 
         // Cleanup
         return () => {

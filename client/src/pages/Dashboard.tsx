@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import { Card, Col, Row } from 'react-bootstrap'
 import { URLEnum } from '../RouterEnum'
 import { NavLink } from 'react-router-dom'
