@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const router = require('./presentation/routes/router');
 const path = require('path');
-const { auth, requiresAuth } = require('express-openid-connect');
+const openid = require('express-openid-connect');
+const oauth2 = require('express-oauth2-jwt-bearer');
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 const config = {
@@ -15,6 +16,10 @@ const config = {
   issuerBaseURL: 'https://fars-metu.eu.auth0.com'
 };
 
+const checkJwt = oauth2.auth({
+  audience: 'https://fars-metu.eu.auth0.com/api/v2/',
+  issuerBaseURL: `https://fars-metu.eu.auth0.com`,
+});
 
 /**
  * Postman'den atilan istekler uygulamaya dusmuyor, sanirim CORS policy ile ilgiliymis bu denemeleri yaptim, cozemedim
@@ -50,7 +55,7 @@ const config = {
 
 app.use(express.json()); // Parse JSON data from requests
 
-app.use(auth(config));
+app.use(openid.auth(config));
 
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {
@@ -58,7 +63,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/api', requiresAuth(), router); // Mount the router middleware at the '/api' path and require authentication
+app.use('/api', checkJwt, router); // Mount the router middleware at the '/api' path and require authentication
 
 // Serve static files from the client/build directory
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -71,7 +76,7 @@ app.get('/logout', (req, res) => {
 });
 
 // Serve the index.html file for any other requests
-app.get('*', requiresAuth(), (req, res) => {
+app.get('*', openid.requiresAuth(), (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
