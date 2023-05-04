@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function LandingPage() {
   const backgroundImage = {
@@ -13,6 +14,8 @@ function LandingPage() {
     color: 'white',
   };
 
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div style={backgroundImage}>
       <div className="container">
@@ -22,7 +25,7 @@ function LandingPage() {
           <hr className="my-4" />
           <p>Click the button below to get started.</p>
           <a className="btn btn-primary btn-lg" href="dashboard" role="button">Get Started</a>
-
+          <button onClick={() => loginWithRedirect()}>Log In</button>
         </div>
       </div>
     </div>

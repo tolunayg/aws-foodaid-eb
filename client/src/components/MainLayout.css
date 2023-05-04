@@ -212,3 +212,7 @@ ListItemText:hover {
       right: 0;
     }
   }
+
+  hr {
+    color: white;
+  }
