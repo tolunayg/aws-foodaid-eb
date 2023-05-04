@@ -44,10 +44,8 @@ function Food() {
     <>
         <div>Food</div>
       
-      <Form/>
-       
-     
-        <MyComponent/> 
+        {/* <Form/>
+        <MyComponent/>  */}
       
     </>
   )
