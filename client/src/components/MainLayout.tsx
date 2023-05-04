@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { URLEnum } from '../RouterEnum'
+import { useAuth0 } from "@auth0/auth0-react";
 // import { getUserActiveRole } from '../util'
 
 import './MainLayout.css';
@@ -61,6 +62,7 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
         ? "sidebar-expanded"
         : "sidebar-collapsed";
 
+    const { logout } = useAuth0();
 
     return (
         <>
@@ -87,7 +89,10 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                                     <li><a className="dropdown-item" href="#">Action</a></li>
                                     <li><a className="dropdown-item" href="#">Another action</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="logout">Logout</a></li>
+                                    <li><a className="dropdown-item"  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</a></li>
+                                    {/* <li><button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                                        Log Out
+                                        </button></li> */}
                                 </ul>
                             </li>
                         </ul>
@@ -114,6 +119,10 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                             </Nav.Item>
                             <Nav.Item>
                                 <NavLink className="nav-link" to={URLEnum.FOOD}>Food</NavLink>
+                            </Nav.Item>
+                            <hr className="mb-3" />
+                            <Nav.Item>
+                                <NavLink className="nav-link" to={URLEnum.PROFILE}>Profile</NavLink>
                             </Nav.Item>
                         </Nav>
 

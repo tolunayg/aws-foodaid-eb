@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 function Transports() {
   return (
@@ -8,4 +9,4 @@ function Transports() {
   )
 }
 
-export default Transports
+export default withAuthenticationRequired(Transports);

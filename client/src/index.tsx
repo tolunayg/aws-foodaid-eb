@@ -1,18 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-// import component - Page
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import ErrorPage from './pages/ErrorPage';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
+import { Auth0Provider } from '@auth0/auth0-react';
 import { routes } from './appRouter';
+
+const domain = 'fars-metu.eu.auth0.com';
+const clientId = 'sPmf1C7oiGg8zGlrMmLcgRwQLxai77IE';
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render( routes );
+
+root.render(
+  <Auth0Provider
+    domain={domain}
+    clientId={clientId}
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+    
+  >
+    { routes }
+  </Auth0Provider>
+);
