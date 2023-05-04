@@ -1,7 +1,11 @@
+
 import React, { useEffect, useState } from 'react'
 import { getProducts } from '../service'
 import { IGetProducts } from '../models/IGetProducts';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import Form from '../components/locationselectform'
+import MyComponent from '../components/foodform'
+
 
 function Food() {
   const [productData, setProductData] = useState<IGetProducts>()
@@ -39,6 +43,12 @@ function Food() {
   return (
     <>
         <div>Food</div>
+      
+      <Form/>
+       
+     
+        <MyComponent/> 
+      
     </>
   )
 }
