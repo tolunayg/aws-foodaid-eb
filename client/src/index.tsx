@@ -16,7 +16,9 @@ root.render(
     domain={domain}
     clientId={clientId}
     authorizationParams={{
-      redirect_uri: window.location.origin
+      redirect_uri: window.location.origin,
+      audience: `https://fars-metu.eu.auth0.com/api/v2/`,
+      scope: "read:current_user profile openid email offline_access",
     }}
     
   >

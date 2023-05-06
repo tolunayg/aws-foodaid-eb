@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const router = require('./presentation/routes/router');
 const path = require('path');
@@ -20,6 +21,8 @@ const checkJwt = oauth2.auth({
   audience: 'https://fars-metu.eu.auth0.com/api/v2/',
   issuerBaseURL: `https://fars-metu.eu.auth0.com`,
 });
+
+app.use(cors());
 
 app.use(express.json()); // Parse JSON data from requests
 

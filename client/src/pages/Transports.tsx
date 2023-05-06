@@ -4,7 +4,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 function Transports() {
   return (
     <>
-        <div>Transports</div>
+        <h1>Transports</h1>
     </>
   )
 }

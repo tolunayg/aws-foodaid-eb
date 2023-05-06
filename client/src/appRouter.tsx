@@ -12,7 +12,10 @@ import Users from './pages/Users';
 import Centers from './pages/Centers';
 import Transports from './pages/Transports';
 import Food from './pages/Food';
+import ProductForm from './pages/forms/ProductForm';
 import MainLayout from "./components/MainLayout";
+import MyComponent from "./components/foodform";
+import FoodDetail from "./pages/FoodDetail";
 
 export const routes =
 <BrowserRouter>
@@ -27,6 +30,9 @@ export const routes =
         <Route path = {URLEnum.CENTERS} element={ <MainLayout component={<Centers />} /> } />
         <Route path = {URLEnum.TRANSPORTS} element={ <MainLayout component={<Transports />} /> } />
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
+        <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
+        <Route path = {URLEnum.FOOD_ADD} element={ <MainLayout component={<ProductForm />} /> } />
+        <Route path = "/food/:productId" element={ <MainLayout component={<FoodDetail />} /> } />
         <Route path= '*' element={<ErrorPage/>} />
     </Routes>
 </BrowserRouter>
