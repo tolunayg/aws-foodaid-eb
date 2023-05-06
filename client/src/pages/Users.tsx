@@ -4,7 +4,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 function Users() {
   return (
     <>
-        <div>Users</div>
+        <h1>Users</h1>
     </>
   )
 }

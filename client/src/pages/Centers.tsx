@@ -4,7 +4,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 function Centers() {
   return (
     <>
-        <div>Centers</div>
+        <h1>Centers</h1>
     </>
   )
 }

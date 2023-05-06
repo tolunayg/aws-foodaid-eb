@@ -20,8 +20,8 @@ function Dashboard() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col key="users">
-                <Card as={NavLink} to={URLEnum.USERS} className="card-hover" >
+              <Col key="centers">
+                <Card as={NavLink} to={URLEnum.CENTERS} className="card-hover" >
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Centers</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
@@ -30,8 +30,8 @@ function Dashboard() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col key="users">
-                <Card as={NavLink} to={URLEnum.USERS} className="card-hover" >
+              <Col key="transports">
+                <Card as={NavLink} to={URLEnum.TRANSPORTS} className="card-hover" >
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Transports</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
@@ -40,8 +40,8 @@ function Dashboard() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col key="users">
-                <Card as={NavLink} to={URLEnum.USERS} className="card-hover" >
+              <Col key="food">
+                <Card as={NavLink} to={URLEnum.FOOD} className="card-hover" >
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Food</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>

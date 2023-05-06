@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
-const baseUrl = process.env.REACT_APP_BASE_URL
-
+// const baseUrl = process.env.REACT_APP_BASE_URL
+const baseUrl = "http://localhost:5000"
 
 const config = axios.create({
     baseURL: baseUrl,
@@ -9,14 +9,36 @@ const config = axios.create({
     headers: { 'Content-Type': 'application/json' }
 });
 
-// get data
+const configAuth0 = axios.create({
+    baseURL: 'https://fars-metu.eu.auth0.com/api/v2/users/${user?.sub}',
+    timeout: 15000,
+    headers: { 'Content-Type': 'application/json' }
+});
+
+// get all products
 export const getProducts = async (accessToken: string) => {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
-    const response = await config.post('/api/products', {}, { headers });
+    const response = await config.get('/api/products', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get product by id
+export const getProductById = async (accessToken: string, productId: number) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/products/?_id=${productId}`, { headers });
+
     return response.data;
   } catch (error) {
     console.error(error);
