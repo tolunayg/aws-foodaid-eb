@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "postinstall": "npm cache clean --force && cd client && npm install --no-optional --no-audit --max-old-space-size=256 && npm run build && cd .."
+    "postinstall": "rm -rf client/node_modules && npm cache clean --force && cd client && npm install --no-optional --no-audit --max-old-space-size=256 && npm run build && cd .."
   },
   "devDependencies": {
     "typescript": "^5.0.4"
