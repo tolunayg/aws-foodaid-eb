@@ -16,6 +16,8 @@ import ProductForm from './pages/forms/ProductForm';
 import MainLayout from "./components/MainLayout";
 import MyComponent from "./components/foodform";
 import FoodDetail from "./pages/FoodDetail";
+import DistributionPoint from "./pages/DistributionPoint";
+import DistributionPointDetail from "./pages/DistributionPointDetail";
 
 export const routes =
 <BrowserRouter>
@@ -33,6 +35,8 @@ export const routes =
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
         <Route path = {URLEnum.FOOD_ADD} element={ <MainLayout component={<ProductForm />} /> } />
         <Route path = "/food/:productId" element={ <MainLayout component={<FoodDetail />} /> } />
+        <Route path = {URLEnum.DISTRIBUTION_POINT} element={ <MainLayout component={<DistributionPoint />} /> } />
+        <Route path = "/distribution-points/:distributionPointId" element={ <MainLayout component={<DistributionPointDetail />} /> } />
         <Route path= '*' element={<ErrorPage/>} />
     </Routes>
 </BrowserRouter>
