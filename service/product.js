@@ -6,8 +6,7 @@ exports.getAll = async () => {
 }
 
 exports.getById = async (id) => {
-    product = await productRepository.getById(id)
-
+    let product = await productRepository.getById(id)
     try {
         await productValidation.isExist(product)
     } catch (error) {

@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const config = require('../../configs.json')
 
 const uri = config.database.uri;
@@ -21,4 +21,9 @@ function getDb() {
   return client.db(dbName);
 }
 
-module.exports = { getDb };
+function getObjectId(id){
+  let oId = new ObjectId(id)
+  return oId
+}
+
+module.exports = { getDb, getObjectId };
