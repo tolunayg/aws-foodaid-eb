@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node app.js",
     "devStart": "nodemon app.js",
-    "postinstall": "cd client && npm run build && cd .. && pwd"
+    "postinstall": "cd client && npm install && npm run build && cd .."
   },
   "devDependencies": {
     "typescript": "^5.0.4"
