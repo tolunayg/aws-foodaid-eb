@@ -7,6 +7,6 @@ const distributionPointRoutes = require('./distributionPoints');
 // Mount your route files to the router object
 router.use('/restaurants', restaurantRoutes);
 router.use('/products', productRoutes);
-router.use('/distributionPoints', distributionPointRoutes);
+router.use('/distribution-points', distributionPointRoutes);
 
 module.exports = router;
