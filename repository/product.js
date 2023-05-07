@@ -11,8 +11,8 @@ exports.getById = async (id) => {
 exports.getAllById = async (id) => (await getDb().collection('products').find({ _id: getObjectId(id) }).toArray())
 exports.create = async (product) => getDb().collection('products').insertOne(product);
 exports.update = async (id, product) => getDb().collection('products').findOneAndUpdate(
-    { _id: id },
+    { _id: getObjectId(id) },
     { $set: product },
     { returnOriginal: false }
 );
-exports.delete = async (id) => getDb().collection('products').findOneAndDelete({ _id: id });
+exports.delete = async (id) => getDb().collection('products').findOneAndDelete({ _id: getObjectId(id) });
