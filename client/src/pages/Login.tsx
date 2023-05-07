@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { URLEnum } from '../RouterEnum'
 // import { encrypt } from './util'
@@ -83,11 +82,6 @@ function Login() {
 
     return (
         <>
-            {/* <Helmet>
-                <title>User Login</title>
-                <meta name="description" content="User Login Page"></meta>
-                <link rel="icon" href="https://ffo3gv1cf3ir.merlincdn.net/static_lib/assetsv2/common/images/favicon.ico" />
-            </Helmet> */}
             <div className='row'>
                 <div className='col-sm-4'></div>
                 <div className='col-sm-4'>
