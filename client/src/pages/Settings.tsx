@@ -9,4 +9,5 @@ function Settings() {
   )
 }
 
-export default withAuthenticationRequired(Settings);
+// export default withAuthenticationRequired(Settings);
+export default Settings;

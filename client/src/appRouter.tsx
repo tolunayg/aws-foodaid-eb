@@ -21,7 +21,7 @@ export const routes =
 <BrowserRouter>
     <Routes>
         <Route path = {URLEnum.BASE} element={<Home/>}/>
-        {/* <Route path = {URLEnum.LOGIN} element={<Login/>}/> */}
+        <Route path = {URLEnum.LOGIN} element={<Login/>}/>
         <Route path = {URLEnum.HOME} element={ <MainLayout component={<Home />} /> } />
         <Route path = {URLEnum.DASHBOARD} element={ <MainLayout component={<Dashboard />} /> } />
         <Route path = {URLEnum.SETTINGS} element={ <MainLayout component={<Settings />} /> } />

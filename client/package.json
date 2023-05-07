@@ -49,5 +49,8 @@
   },
   "resolutions": {
     "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }

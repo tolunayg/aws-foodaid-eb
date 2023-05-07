@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { URLEnum } from '../RouterEnum'
+import { login } from '../service';
 // import { encrypt } from './util'
 
 function Login() {
@@ -18,67 +19,23 @@ function Login() {
 
     const userLogin = (evt:React.FormEvent) => {
         evt.preventDefault()
-        // userLoginService(username, password).then( res => {
-        //     console.log("Res" ,res)
-        //     const message = res.data.message
-        //     if ( message === "basarili giris" && res.data.token ) {
-        //         // const stToken = JSON.stringify( res.data.token )
-        //         const stToken = res.data.token
-        //         console.log("stToken", stToken)
 
-        //         const userRoles = getUserRolesFromJwt(stToken)
-        //         console.log('userRoles::', userRoles)
-        //         localStorage.setItem('username', username )
-        //         localStorage.setItem('userRoles', JSON.stringify(userRoles))
-                
-        //         // sessionStorage.setItem('user', encrypt(stToken))
-        //         sessionStorage.setItem('token', stToken)
-        //         if ( remember ) {
-        //             localStorage.setItem('token', stToken )
-        //         }
+        
+        login(username, password).then( res => {
+            console.log("Res data" ,res.data)
+            const accessToken = res.data.access_token
+            if (accessToken) {
+                console.log("TOKEN RECEIVED")
+                sessionStorage.setItem('accessToken', accessToken);
+            }
+            else {
+                console.log("NO TOKEN")
+            }
 
-        //         if (userRoles?.length == 1) {
-
-        //             switch (userRoles[0]) {
-        //                 case 'FARS_ADMIN':
-        //                     sessionStorage.setItem('userRole', 'FARS_ADMIN')
-        //                     // navigate(URLEnum.DASHBOARD_FARS_ADMIN)
-        //                     break;
-        //                 case 'FARS_COLLECTSTAFF':
-        //                     sessionStorage.setItem('userRole', 'FARS_COLLECTSTAFF')
-        //                     // navigate(URLEnum.DASHBOARD_FARS_COLLECTSTAFF)
-        //                     break;
-        //                 case 'FARS_DISTRIBUTIONADMIN':
-        //                     sessionStorage.setItem('userRole', 'FARS_DISTRIBUTIONADMIN')
-        //                     // navigate(URLEnum.DASHBOARD_FARS_DISTRIBUTIONADMIN)
-        //                     break;
-                    
-        //                 default:
-        //                     navigate(URLEnum.LOGIN)
-        //                     console.log("Undefined Role")
-        //                     break;
-        //             }
-        //         }
-
-        //         if (userRoles!.length > 1) {
-        //             // Navigate to Select Role Page
-        //             navigate(URLEnum.HOME)
-        //             // Set user role on Session Storage
-        //         }
-        //     }else {
-        //         setError( message )
-        //     }
-        // }).catch( error => {
-        //     setError( error.message )
-        // })
-
-        if ( username === 'admin' && password === '12345') {
-            navigate(URLEnum.HOME)
-        }
-        else {
-            setError('Username or password fail!');
-        }
+            }
+        );
     }
+       
 
     return (
         <>

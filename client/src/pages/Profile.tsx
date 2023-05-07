@@ -55,4 +55,5 @@ function Profile() {
 }
 
 
-export default withAuthenticationRequired(Profile);
+// export default withAuthenticationRequired(Profile);
+export default Profile;

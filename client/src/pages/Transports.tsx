@@ -9,4 +9,5 @@ function Transports() {
   )
 }
 
-export default withAuthenticationRequired(Transports);
+// export default withAuthenticationRequired(Transports);
+export default Transports;

@@ -19,8 +19,9 @@ function Food() {
     const fetchData = async () => {
 
       try {
-        const accessToken = await getAccessTokenSilently();
-        const data = await getProducts(accessToken);
+        // const accessToken = await getAccessTokenSilently();
+        const accessToken = sessionStorage.getItem('accessToken')
+        const data = await getProducts(accessToken!);
         setProductData(data);
 
       } catch (error) {
@@ -94,4 +95,5 @@ function Food() {
   )
 }
 
-export default withAuthenticationRequired(Food);
+// export default withAuthenticationRequired(Food);
+export default Food;

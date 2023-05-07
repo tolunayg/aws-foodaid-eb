@@ -56,4 +56,5 @@ function Dashboard() {
   );
 }
 
-export default withAuthenticationRequired(Dashboard);
+// export default withAuthenticationRequired(Dashboard);
+export default Dashboard;

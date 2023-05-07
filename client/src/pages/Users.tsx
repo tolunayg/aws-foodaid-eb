@@ -9,4 +9,5 @@ function Users() {
   )
 }
 
-export default withAuthenticationRequired(Users);
+// export default withAuthenticationRequired(Users);
+export default Users;

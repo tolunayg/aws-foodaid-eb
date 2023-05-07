@@ -10,10 +10,30 @@ const config = axios.create({
 });
 
 const configAuth0 = axios.create({
-    baseURL: 'https://fars-metu.eu.auth0.com/api/v2/users/${user?.sub}',
-    timeout: 15000,
-    headers: { 'Content-Type': 'application/json' }
+  baseURL: 'https://fars-metu.eu.auth0.com/oauth/token',
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+    'audience': 'https://fars-metu.eu.auth0.com/api/v2/',
+    'client_id': 'KGW6SDS3zMrecFa5XX3XnJjUoTIszDWu',
+    'client_secret': 'A7kjY0HwyAVO0yL_fgqKVnfcjyrTVWGVTCyrZY7Zi1DZ0KRGIuSqMi5z_rHB96d9',
+    'grant_type': 'password'
+  },
+  withCredentials: true
 });
+
+export const login = async (username: string, password: string) => {
+  const headers = {
+    username: username,
+    password: password
+  };
+  try {
+    return await configAuth0.get('/oauth/token', { headers });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 // get all products
 export const getProducts = async (accessToken: string) => {

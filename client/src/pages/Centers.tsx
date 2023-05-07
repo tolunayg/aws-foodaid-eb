@@ -9,4 +9,5 @@ function Centers() {
   )
 }
 
-export default withAuthenticationRequired(Centers);
+// export default withAuthenticationRequired(Centers);
+export default Centers;
