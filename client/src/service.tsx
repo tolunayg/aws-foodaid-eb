@@ -37,7 +37,7 @@ export const getProductById = async (accessToken: string, productId: number) => 
     'Content-Type': 'application/json',
   };
   try {
-    const response = await config.get(`/api/products/?_id=${productId}`, { headers });
+    const response = await config.get(`/api/products/${productId}`, { headers });
 
     return response.data;
   } catch (error) {
@@ -45,3 +45,4 @@ export const getProductById = async (accessToken: string, productId: number) => 
     throw error;
   }
 }
+

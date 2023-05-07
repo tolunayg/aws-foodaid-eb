@@ -19,7 +19,7 @@ root.render(
       redirect_uri: window.location.origin,
       audience: `https://fars-metu.eu.auth0.com/api/v2/`,
       scope: "read:current_user profile openid email offline_access",
-      cookieOptions: "secure: false",
+      cookieOptions: { secure: false },
     }}
     
   >

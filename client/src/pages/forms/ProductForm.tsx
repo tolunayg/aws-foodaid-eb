@@ -54,6 +54,13 @@ function ProductForm() {
             const data = await getProductById(accessToken, productId);
             console.log(data);
             // Set form values from data
+            const updatedInitialValues = {
+              name: data.name,
+              category: data.productCategoryId,
+              unit: data.unit,
+            };
+            // Set the form values from the updated initial values
+            formik.setValues(updatedInitialValues);
 
         } catch (error) {
             console.error(error);
@@ -71,6 +78,7 @@ function ProductForm() {
   const handleSubmitButton = () => {
     if (mode === 'edit' && productId) {
         console.log("IN EDIT MODE, UPDATE")
+        
     }
     else {
         console.log("IN ADD MODE, CREATE")
