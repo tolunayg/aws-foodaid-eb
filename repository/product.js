@@ -8,7 +8,7 @@ exports.getById = async (id) => {
     let result = await collection.findOne(query);
     return result
 }
-exports.getMaxId = async () => (await getDb().collection('products').aggregate({ $group : { _id: null, max: { $max : "$id" }}}).forEach( x => console.log(x)))
+exports.getAllById = async (id) => (await getDb().collection('products').find({ _id: getObjectId(id) }).toArray())
 exports.create = async (product) => getDb().collection('products').insertOne(product);
 exports.update = async (id, product) => getDb().collection('products').findOneAndUpdate(
     { _id: id },

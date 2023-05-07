@@ -18,7 +18,7 @@ exports.getById = async (id) => {
 
 exports.create = async (product) => {
     try {
-        await productValidation.insertValidations(productRepository, product.product_id)
+        await productValidation.insertValidations(productRepository, product._id)
     } catch (error) {
         throw error
     }
@@ -31,7 +31,6 @@ exports.create = async (product) => {
 
 exports.update = async (id, product) => {
     try {
-        product.product_id = id
         let updated = await productRepository.update(id, product)
         await productValidation.isExist(updated.value)
     } catch (error) {
