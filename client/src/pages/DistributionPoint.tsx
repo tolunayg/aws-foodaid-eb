@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { getDistributionPoints } from '../service'
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Card, Col, Modal, Nav, Row } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import DistributionPointDetail from '../components/DistributionPointDetail';
@@ -44,12 +44,12 @@ function DistributionPoint() {
       <h1>DistributionPoint</h1>
 
       <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-        <NavLink to="/distribution-point/add">
-          <Button variant="primary" type="submit">Add Distribution Point</Button>
+        <NavLink to="/distribution-points/add">
+          <Button variant="success" type="submit">Add Distribution Point</Button>
         </NavLink>
-        <NavLink to="/distribution-point/edit">
+        {/* <NavLink to="/distribution-point/edit">
           <Button variant="warning" type="submit">Edit Distribution Point</Button>
-        </NavLink>
+        </NavLink> */}
       </div>
 
 

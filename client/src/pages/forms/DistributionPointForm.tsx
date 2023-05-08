@@ -19,17 +19,18 @@ interface CustomField {
   value: string;
 }
 
-function ProductForm() {
+function DistributionPointForm() {
     // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { state } = useLocation();
-    const productId = state?.productId;
-    const mode:Mode = productId ? Mode.Edit : Mode.Add;
+    const distributionPointId = state?.distributionPointId;
+    const mode:Mode = distributionPointId ? Mode.Edit : Mode.Add;
   const [customFields, setCustomFields] = useState<CustomField[]>([]);
   const formik = useFormik({
     initialValues: {
-      name: '',
-      category: '',
-      unit: '',
+      city: '',
+      district: '',
+      distributionPointName: '',
+      address: '',
     },
     onSubmit: (values) => {
         const customFieldsObj: Record<string, string> = {};
@@ -44,24 +45,25 @@ function ProductForm() {
 
 
   useEffect(() => {
-    // Make API call to get product details based on `productId`
+    // Make API call to get product details based on `distributionPointId`
     // Set the initial values
-    if (mode === 'edit' && productId) {
+    if (mode === 'edit' && distributionPointId) {
         const fetchData = async () => {
 
         try {
             // const accessToken = await getAccessTokenSilently();
             const accessToken = '123';
-            const data = await getProductById(accessToken, productId);
-            console.log(data);
-            // Set form values from data
-            const updatedInitialValues = {
-              name: data.name,
-              category: data.productCategoryId,
-              unit: data.unit,
-            };
-            // Set the form values from the updated initial values
-            formik.setValues(updatedInitialValues);
+            // const data = await getDistributionPointById(accessToken, distributionPointId);
+            // console.log(data);
+            // // Set form values from data
+            // const updatedInitialValues = {
+            //   city: data.city,
+            //   district: data.district,
+            //   distributionPointName: data.distributionPointName,
+            //   address: data.address,
+            // };
+            // // Set the form values from the updated initial values
+            // formik.setValues(updatedInitialValues);
 
         } catch (error) {
             console.error(error);
@@ -69,7 +71,7 @@ function ProductForm() {
         };
         fetchData();
     }
-}, [mode, productId]);
+}, [mode, distributionPointId]);
  
 
   const handleAddCustomField = () => {
@@ -77,7 +79,7 @@ function ProductForm() {
   };
 
   const handleSubmitButton = () => {
-    if (mode === 'edit' && productId) {
+    if (mode === 'edit' && distributionPointId) {
         console.log("IN EDIT MODE, UPDATE")
         
     }
@@ -106,21 +108,26 @@ function ProductForm() {
 
   return (
     <>
-      <h1>Add New Food</h1>
+      <h1>Add New Distribution Point</h1>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
+          <Form.Label>City</Form.Label>
+          <Form.Control type="text" id="city" name="city" value={formik.values.city} onChange={formik.handleChange} />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>District</Form.Label>
+          <Form.Control type="text" id="district" name="district" value={formik.values.district} onChange={formik.handleChange} />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" id="name" name="name" value={formik.values.name} onChange={formik.handleChange} />
+          <Form.Control type="text" id="distributionPointName" name="distributionPointName" value={formik.values.distributionPointName} onChange={formik.handleChange} />
         </Form.Group>
-
+        
         <Form.Group className="mb-3">
-          <Form.Label>Category</Form.Label>
-          <Form.Control type="text" id="category" name="category" value={formik.values.category} onChange={formik.handleChange} />
-        </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Unit</Form.Label>
-          <Form.Control type="text" id="unit" name="unit" value={formik.values.unit} onChange={formik.handleChange} />
+          <Form.Label>Address</Form.Label>
+          <Form.Control type="text" id="address" name="address" value={formik.values.address} onChange={formik.handleChange} />
         </Form.Group>
 
         {customFields.map((field, index) => (
@@ -146,5 +153,5 @@ function ProductForm() {
   );
 }
 
-// export default withAuthenticationRequired(ProductForm);
-export default ProductForm;
+// export default withAuthenticationRequired(DistributionPointForm);
+export default DistributionPointForm;

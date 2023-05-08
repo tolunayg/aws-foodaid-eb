@@ -20,12 +20,12 @@ function LandingPage() {
     <div style={backgroundImage}>
       <div className="container">
         <div className="jumbotron text-center">
-          <h1 className="display-4 font-weight-bold">Welcome to my landing page!</h1>
+          <h1 className="display-4 font-weight-bold">Welcome to FARS!</h1>
           <p className="lead">Thanks for visiting. This is a simple landing page built using React functional components and styled with Bootstrap.</p>
           <hr className="my-4" />
           <p>Click the button below to get started.</p>
           <a className="btn btn-primary btn-lg" href="dashboard" role="button">Get Started</a>
-          <button onClick={() => loginWithRedirect()}>Log In</button>
+          {/* <button onClick={() => loginWithRedirect()}>Log In</button> */}
         </div>
       </div>
     </div>

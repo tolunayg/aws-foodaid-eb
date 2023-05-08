@@ -2,16 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { getProducts } from '../service'
 import { IGetProducts } from '../models/IGetProducts';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-import Form from '../components/locationselectform'
-import MyComponent from '../components/foodform'
+// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Card, Col, Modal, Nav, Row } from 'react-bootstrap';
 import { Link, NavLink } from "react-router-dom";
 import ProductDetail from '../components/ProductDetail';
 
 function Food() {
   const [productData, setProductData] = useState<IGetProducts[]>()
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<IGetProducts>();
   
@@ -48,11 +46,11 @@ function Food() {
 
         <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <NavLink to="/food/add">
-            <Button variant="primary" type="submit">Add Food</Button>
+            <Button variant="success" type="submit">Add Food</Button>
           </NavLink>
-          <NavLink to="/food/edit">
+          {/* <NavLink to="/food/edit">
             <Button variant="warning" type="submit">Edit Food</Button>
-          </NavLink>
+          </NavLink> */}
         </div>
 
 
