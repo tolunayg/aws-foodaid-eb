@@ -32,7 +32,9 @@ function ProductDetail({ showModal, handleCloseModal, product }: Props) {
             <p>Category: {product?.productCategoryId}</p>
             <p>Unit: {product?.unit}</p>
             <p>Id: {product?._id}</p>
-            {/* Add more product details here */}
+            {product && Object.entries(product.fields).map(([key, value]) => (
+                <p key={key}>{key}: {value}</p>
+            ))}
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>

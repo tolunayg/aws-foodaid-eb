@@ -41,7 +41,7 @@ function DistributionPoint() {
 
   return (
     <>
-      <h1>DistributionPoint</h1>
+      <h1>Distribution Point</h1>
 
       <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         <NavLink to="/distribution-points/add">

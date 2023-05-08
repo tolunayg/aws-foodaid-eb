@@ -70,6 +70,39 @@ export const getProductById = async (accessToken: string, productId: number) => 
   }
 }
 
+// create product
+export const createProduct = async (accessToken: string, product: {} ) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/products', product, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create product
+export const updateProduct = async (accessToken: string, productId: number, product: {} ) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.put(`/api/products/${productId}`, product, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
 
 // get all distributionPoints
 export const getDistributionPoints = async (accessToken: string) => {
@@ -95,6 +128,38 @@ export const getDistributionPointById = async (accessToken: string, distribution
   try {
     const response = await config.get(`/api/distribution-points/${distributionPointId}`, { headers });
 
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create product
+export const createDistributionPoint = async (accessToken: string, distributionPoint: {} ) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/distribution-points', distributionPoint, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create product
+export const updateDistributionPoint = async (accessToken: string, distributionPointId: number, distributionPoint: {} ) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.put(`/api/distribution-points/${distributionPointId}`, distributionPoint, { headers });
     return response.data;
   } catch (error) {
     console.error(error);

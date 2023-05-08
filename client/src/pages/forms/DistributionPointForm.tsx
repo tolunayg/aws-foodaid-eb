@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { getDistributionPointById, getProductById } from '../../service';
+import { createDistributionPoint, getDistributionPointById, updateDistributionPoint } from '../../service';
+import { IGetDistributionPoints } from '../../models/IGetDistributionPoints';
 
 enum Mode {
     Add = 'add',
@@ -45,7 +46,7 @@ function DistributionPointForm() {
 
 
   useEffect(() => {
-    // Make API call to get product details based on `distributionPointId`
+    // Make API call to get distributionPoint details based on `distributionPointId`
     // Set the initial values
     if (mode === 'edit' && distributionPointId) {
         const fetchData = async () => {
@@ -65,6 +66,12 @@ function DistributionPointForm() {
             // Set the form values from the updated initial values
             formik.setValues(updatedInitialValues);
 
+
+            // Create a new object with the custom field names and their values
+            const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, value: String(value) }));
+            console.log(customFieldsData);
+            setCustomFields(customFieldsData);
+
         } catch (error) {
             console.error(error);
         }
@@ -78,15 +85,37 @@ function DistributionPointForm() {
     setCustomFields([...customFields, { name: '', value: '' }]);
   };
 
-  const handleSubmitButton = () => {
+  const handleSubmitButton = async () => {
+    const { city, district, distributionPointName, address } = formik.values;
+    const fields = Object.fromEntries(customFields.map(customField => [customField.name, customField.value]));
+
+    const distributionPoint = {
+      city, 
+      district, 
+      distributionPointName, 
+      address,
+      fields,
+    };
+  
     if (mode === 'edit' && distributionPointId) {
-        console.log("IN EDIT MODE, UPDATE")
-        
-    }
-    else {
-        console.log("IN ADD MODE, CREATE")
+      console.log("IN EDIT MODE, UPDATE");
+      const updatedDistributionPoint = await updateDistributionPoint('123', distributionPointId, distributionPoint);
+        console.log(updatedDistributionPoint);
+      // TODO: Update distributionPoint and call
+    } else {
+      console.log("IN ADD MODE, CREATE");
+      try {
+        console.log(distributionPoint)
+        const createdDistributionPoint = await createDistributionPoint('123', distributionPoint);
+        console.log(createdDistributionPoint);
+        // TODO: Handle successful creation
+      } catch (error) {
+        console.error(error);
+        // TODO: Handle error
+      }
     }
   };
+  
 
   const handleCustomFieldNameChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newCustomFields = [...customFields];
@@ -106,12 +135,13 @@ function DistributionPointForm() {
   };
   
   const headingText = mode === Mode.Add ? 'Add New Distribution Point' : 'Edit Distribution Point';
-
+  
   return (
+
     <>
       <h1>{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
-        <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
           <Form.Label>City</Form.Label>
           <Form.Control type="text" id="city" name="city" value={formik.values.city} onChange={formik.handleChange} />
         </Form.Group>

@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { getProductById } from '../../service';
+import { createProduct, getProductById, updateProduct } from '../../service';
+import { IGetProducts } from '../../models/IGetProducts';
 
 enum Mode {
     Add = 'add',
@@ -28,7 +29,7 @@ function ProductForm() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      category: '',
+      category: 0,
       unit: '',
     },
     onSubmit: (values) => {
@@ -63,6 +64,12 @@ function ProductForm() {
             // Set the form values from the updated initial values
             formik.setValues(updatedInitialValues);
 
+
+            // Create a new object with the custom field names and their values
+            const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, value: String(value) }));
+            console.log(customFieldsData);
+            setCustomFields(customFieldsData);
+
         } catch (error) {
             console.error(error);
         }
@@ -76,15 +83,36 @@ function ProductForm() {
     setCustomFields([...customFields, { name: '', value: '' }]);
   };
 
-  const handleSubmitButton = () => {
+  const handleSubmitButton = async () => {
+    const { name, category, unit } = formik.values;
+    const fields = Object.fromEntries(customFields.map(customField => [customField.name, customField.value]));
+
+    const product = {
+      name,
+      productCategoryId: Number(category),
+      unit,
+      fields,
+    };
+  
     if (mode === 'edit' && productId) {
-        console.log("IN EDIT MODE, UPDATE")
-        
-    }
-    else {
-        console.log("IN ADD MODE, CREATE")
+      console.log("IN EDIT MODE, UPDATE");
+      const updatedProduct = await updateProduct('123', productId, product);
+        console.log(updatedProduct);
+      // TODO: Update product and call
+    } else {
+      console.log("IN ADD MODE, CREATE");
+      try {
+        console.log(product)
+        const createdProduct = await createProduct('123', product);
+        console.log(createdProduct);
+        // TODO: Handle successful creation
+      } catch (error) {
+        console.error(error);
+        // TODO: Handle error
+      }
     }
   };
+  
 
   const handleCustomFieldNameChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newCustomFields = [...customFields];

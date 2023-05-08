@@ -25,7 +25,7 @@ function Dashboard() {
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Centers</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
-                      This is a summary of users.
+                      This is a summary of centers.
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -35,7 +35,7 @@ function Dashboard() {
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Transports</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
-                      This is a summary of users.
+                      This is a summary of transports.
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -45,7 +45,17 @@ function Dashboard() {
                   <Card.Body>
                     <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Food</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
-                      This is a summary of users.
+                      Registered foods on the system.
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col key="distribution-points">
+                <Card as={NavLink} to={URLEnum.DISTRIBUTION_POINT} className="card-hover" >
+                  <Card.Body>
+                    <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Distribution Points</Card.Title>
+                    <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
+                      This is a summary of distribution points.
                     </Card.Text>
                   </Card.Body>
                 </Card>
