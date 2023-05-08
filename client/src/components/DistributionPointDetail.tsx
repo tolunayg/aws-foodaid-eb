@@ -18,7 +18,7 @@ function DistributionPointDetail({ showModal, handleCloseModal, distributionPoin
     
     const handleEditClicked = (id:string) => {
         console.log("EDIT CLICKED!!");
-        navigate('/distribuition-points/add', { state: { distributionPointId: id } });
+        navigate('/distribution-points/add', { state: { distributionPointId: id } });
       };
     
     return (

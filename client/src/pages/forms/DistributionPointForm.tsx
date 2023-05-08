@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { getProductById } from '../../service';
+import { getDistributionPointById, getProductById } from '../../service';
 
 enum Mode {
     Add = 'add',
@@ -53,17 +53,17 @@ function DistributionPointForm() {
         try {
             // const accessToken = await getAccessTokenSilently();
             const accessToken = '123';
-            // const data = await getDistributionPointById(accessToken, distributionPointId);
-            // console.log(data);
-            // // Set form values from data
-            // const updatedInitialValues = {
-            //   city: data.city,
-            //   district: data.district,
-            //   distributionPointName: data.distributionPointName,
-            //   address: data.address,
-            // };
-            // // Set the form values from the updated initial values
-            // formik.setValues(updatedInitialValues);
+            const data = await getDistributionPointById(accessToken, distributionPointId);
+            console.log(data);
+            // Set form values from data
+            const updatedInitialValues = {
+              city: data.city,
+              district: data.district,
+              distributionPointName: data.distributionPointName,
+              address: data.address,
+            };
+            // Set the form values from the updated initial values
+            formik.setValues(updatedInitialValues);
 
         } catch (error) {
             console.error(error);
@@ -105,10 +105,11 @@ function DistributionPointForm() {
     setCustomFields([]);
   };
   
+  const headingText = mode === Mode.Add ? 'Add New Distribution Point' : 'Edit Distribution Point';
 
   return (
     <>
-      <h1>Add New Distribution Point</h1>
+      <h1>{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>City</Form.Label>

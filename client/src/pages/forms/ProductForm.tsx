@@ -103,10 +103,12 @@ function ProductForm() {
     setCustomFields([]);
   };
   
-
+  const headingText = mode === Mode.Add ? 'Add New Food' : 'Edit Food';
+  
   return (
+
     <>
-      <h1>Add New Food</h1>
+      <h1>{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
