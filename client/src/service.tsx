@@ -2,6 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
 // const baseUrl = process.env.REACT_APP_BASE_URL
 const baseUrl = "http://localhost:5000"
+const baseToken = process.env.REACT_APP_BASE_TOKEN
+
 
 const config = axios.create({
     baseURL: baseUrl,
@@ -38,7 +40,8 @@ export const login = async (username: string, password: string) => {
 // get all products
 export const getProducts = async (accessToken: string) => {
   const headers = {
-    Authorization: `Bearer ${accessToken}`,
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -53,7 +56,8 @@ export const getProducts = async (accessToken: string) => {
 // get product by id
 export const getProductById = async (accessToken: string, productId: number) => {
   const headers = {
-    Authorization: `Bearer ${accessToken}`,
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
     'Content-Type': 'application/json',
   };
   try {

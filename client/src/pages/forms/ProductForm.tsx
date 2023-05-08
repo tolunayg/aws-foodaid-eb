@@ -20,7 +20,7 @@ interface CustomField {
 }
 
 function ProductForm() {
-    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+    // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { state } = useLocation();
     const productId = state?.productId;
     const mode:Mode = productId ? Mode.Edit : Mode.Add;
@@ -50,7 +50,8 @@ function ProductForm() {
         const fetchData = async () => {
 
         try {
-            const accessToken = await getAccessTokenSilently();
+            // const accessToken = await getAccessTokenSilently();
+            const accessToken = '123';
             const data = await getProductById(accessToken, productId);
             console.log(data);
             // Set form values from data

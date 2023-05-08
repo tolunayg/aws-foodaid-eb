@@ -20,8 +20,8 @@ function Food() {
 
       try {
         // const accessToken = await getAccessTokenSilently();
-        const accessToken = sessionStorage.getItem('accessToken')
-        const data = await getProducts(accessToken!);
+        // const data = await getProducts(accessToken!);
+        const data = await getProducts('123');
         setProductData(data);
 
       } catch (error) {
@@ -29,7 +29,7 @@ function Food() {
       }
     };
     fetchData();
-  }, [getAccessTokenSilently]);
+  }, []);
 
   const handleCardClick = (product: IGetProducts) => {
     setSelectedProduct(product);

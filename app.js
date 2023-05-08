@@ -34,7 +34,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/api', checkJwt, router); // Mount the router middleware at the '/api' path and require authentication
+// app.use('/api', checkJwt, router); // Mount the router middleware at the '/api' path and require authentication
+app.use('/api', router); // Mount the router middleware at the '/api' path and require authentication
 
 // Serve static files from the client/build directory
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -47,7 +48,8 @@ app.get('/logout', (req, res) => {
 });
 
 // Serve the index.html file for any other requests
-app.get('*', openid.requiresAuth(), (req, res) => {
+// app.get('*', openid.requiresAuth(), (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
