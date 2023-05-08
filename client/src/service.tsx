@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
-// const baseUrl = process.env.REACT_APP_BASE_URL
-const baseUrl = "http://localhost:5000"
-const baseToken = process.env.REACT_APP_BASE_TOKEN
+const baseUrl = process.env.REACT_APP_BASE_URL
+// const baseUrl = "http://localhost:5000"
+const baseToken = '123'
 
 
 const config = axios.create({
