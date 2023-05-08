@@ -9,5 +9,6 @@ export enum URLEnum {
     CENTERS='/centers',
     TRANSPORTS='/transports',
     FOOD='/food',
-    FOOD_ADD='/food/add'
+    FOOD_ADD='/food/add',
+    DISTRIBUTION_POINT='/distribution-points'
 } 

@@ -70,3 +70,34 @@ export const getProductById = async (accessToken: string, productId: number) => 
   }
 }
 
+
+// get all distributionPoints
+export const getDistributionPoints = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get('/api/distribution-points', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get distributionPoint by id
+export const getDistributionPointById = async (accessToken: string, distributionPointId: number) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/distribution-points/${distributionPointId}`, { headers });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
