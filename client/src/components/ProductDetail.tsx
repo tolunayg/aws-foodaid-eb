@@ -46,4 +46,5 @@ function ProductDetail({ showModal, handleCloseModal, product }: Props) {
         );
 }
 
-export default withAuthenticationRequired(ProductDetail);
+// export default withAuthenticationRequired(ProductDetail);
+export default ProductDetail;

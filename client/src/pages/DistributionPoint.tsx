@@ -9,7 +9,7 @@ import DistributionPointDetail from '../components/DistributionPointDetail';
 
 function DistributionPoint() {
   const [distributionPointData, setDistributionPointData] = useState<IGetDistributionPoints[]>()
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [selectedDistributionPoint, setSelectedDistributionPoint] = useState<IGetDistributionPoints>();
 
@@ -17,8 +17,8 @@ function DistributionPoint() {
     const fetchData = async () => {
 
       try {
-        const accessToken = await getAccessTokenSilently();
-        const data = await getDistributionPoints(accessToken);
+        // const accessToken = await getAccessTokenSilently();
+        const data = await getDistributionPoints('123');
         setDistributionPointData(data);
 
       } catch (error) {
@@ -26,7 +26,7 @@ function DistributionPoint() {
       }
     };
     fetchData();
-  }, [getAccessTokenSilently]);
+  }, []);
 
   const handleCardClick = (distributionPoint: IGetDistributionPoints) => {
     setSelectedDistributionPoint(distributionPoint);
@@ -92,4 +92,5 @@ function DistributionPoint() {
   )
 }
 
-export default withAuthenticationRequired(DistributionPoint);
+// export default withAuthenticationRequired(DistributionPoint);
+export default DistributionPoint;

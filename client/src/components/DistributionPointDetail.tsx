@@ -44,4 +44,5 @@ function DistributionPointDetail({ showModal, handleCloseModal, distributionPoin
         );
 }
 
-export default withAuthenticationRequired(DistributionPointDetail);
+// export default withAuthenticationRequired(DistributionPointDetail);
+export default DistributionPointDetail;

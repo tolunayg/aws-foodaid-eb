@@ -17,7 +17,7 @@ import MainLayout from "./components/MainLayout";
 import MyComponent from "./components/foodform";
 import FoodDetail from "./pages/FoodDetail";
 import DistributionPoint from "./pages/DistributionPoint";
-import DistributionPointDetail from "./pages/DistributionPointDetail";
+import DistributionPointDetail from "./components/DistributionPointDetail";
 
 export const routes =
 <BrowserRouter>
@@ -36,7 +36,10 @@ export const routes =
         <Route path = {URLEnum.FOOD_ADD} element={ <MainLayout component={<ProductForm />} /> } />
         <Route path = "/food/:productId" element={ <MainLayout component={<FoodDetail />} /> } />
         <Route path = {URLEnum.DISTRIBUTION_POINT} element={ <MainLayout component={<DistributionPoint />} /> } />
-        <Route path = "/distribution-points/:distributionPointId" element={ <MainLayout component={<DistributionPointDetail />} /> } />
+        <Route path = {URLEnum.DISTRIBUTION_POINT_ADD} element={ <MainLayout component={<ProductForm />} /> } />
+        <Route path = "/distribution-points/:distributionPointId" element={ <MainLayout component={<DistributionPointDetail showModal={false} handleCloseModal={function (): void {
+                throw new Error("Function not implemented.");
+            } } />} /> } />
         <Route path= '*' element={<ErrorPage/>} />
     </Routes>
 </BrowserRouter>
