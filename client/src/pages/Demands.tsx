@@ -37,8 +37,9 @@ function Demands() {
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    setSelectedDistributionPointId(value);
+    setSelectedDistributionPointId(value === '' ? null : value);
   };
+  
 
   return (
     <>
@@ -74,16 +75,21 @@ function Demands() {
           </tr>
         </thead>
         <tbody>
-          {filteredDemands.map((demand) => (
-            <tr key={demand._id}>
-              <td>{demand._id}</td>
-              <td>{demand.distributionPointId}</td>
-              <td>{demand.creationDate.toLocaleString()}</td>
-              <td>{demand.createdBy}</td>
-              <td>{demand.lastModifiedDate.toLocaleString()}</td>
-              <td>{demand.lastModifiedBy}</td>
-            </tr>
-          ))}
+          {filteredDemands.map((demand) => {
+            // Find the distribution point with the corresponding ID
+            const distributionPoint = distributionPoints.find((point) => point._id === demand.distributionPointId);
+
+            return (
+              <tr key={demand._id}>
+                <td>{demand._id}</td>
+                <td>{distributionPoint ? distributionPoint.distributionPointName : ''}</td>
+                <td>{demand.creationDate.toLocaleString()}</td>
+                <td>{demand.createdBy}</td>
+                <td>{demand.lastModifiedDate.toLocaleString()}</td>
+                <td>{demand.lastModifiedBy}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </>

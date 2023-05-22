@@ -117,6 +117,22 @@ export const getDemands = async (accessToken: string) => {
   }
 }
 
+// create Demand
+export const createDemand = async (accessToken: string, demand: {} ) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/demands', demand, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 // get all product categories
 export const getProductCategories = async (accessToken: string) => {
   const headers = {

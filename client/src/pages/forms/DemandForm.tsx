@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { getDistributionPoints, getProducts } from '../../service'; // Replace 'your-api-file' with the actual file containing the API functions
+import { getDistributionPoints, getProducts, createDemand } from '../../service'; // Replace 'your-api-file' with the actual file containing the API functions
 import { IGetProducts } from '../../models/IGetProducts'; // Replace 'your-models-file' with the actual file containing the interfaces
 import { IGetDistributionPoints } from '../../models/IGetDistributionPoints'; // Replace 'your-models-file' with the actual file containing the interfaces
-
-
-
-
-
 
 function DemandForm() {
   interface IRequestItem {
@@ -24,13 +19,38 @@ function DemandForm() {
 
   const formik = useFormik({
     initialValues: {
-      distributionPoint: '',
+      distributionPointId: '',
       requestItems: [{ product: '', unit: 0, customFields: {} }],
     },
-    onSubmit: (values) => {
-      console.log(values);
-      // Handle form submission here
+    onSubmit: async (values) => {
+      try {
+        const accessToken = '123'; // Replace with your access token retrieval logic
+    
+        // Get the current date and time
+        const now = new Date();
+        
+        // Format the dates manually
+        const creationDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}.${now.getMilliseconds().toString().padStart(3, '0')}`;
+        const lastModifiedDate = creationDate;
+        
+        // Add the additional fields to the data
+        const dataToSend = {
+          ...values,
+          creationDate,
+          lastModifiedDate,
+          createdBy: 1,
+          lastModifiedBy: 1
+        };
+    
+        const response = await createDemand(accessToken, dataToSend);
+        console.log('API response:', response);
+        // Handle success response
+      } catch (error) {
+        console.error('API error:', error);
+        // Handle error
+      }
     },
+    
   });
 
   useEffect(() => {
@@ -85,7 +105,6 @@ function DemandForm() {
     newRequestItems[index].customFields[field] = event.target.value;
     formik.setFieldValue('requestItems', newRequestItems);
   };
-  
 
 
   return (
@@ -95,9 +114,9 @@ function DemandForm() {
         <Form.Group className="mb-3">
           <Form.Label>Distribution Point</Form.Label>
           <Form.Select
-            id="distributionPoint"
-            name="distributionPoint"
-            value={formik.values.distributionPoint}
+            id="distributionPointId"
+            name="distributionPointId"
+            value={formik.values.distributionPointId}
             onChange={formik.handleChange}
           >
             <option value="">Select a distribution point</option>
