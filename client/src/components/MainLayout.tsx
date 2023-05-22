@@ -125,6 +125,10 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                             </Nav.Item>
                             <hr className="mb-3" />
                             <Nav.Item>
+                                <NavLink className="nav-link" to={URLEnum.DEMANDS}>Demands</NavLink>
+                            </Nav.Item>
+                            <hr className="mb-3" />
+                            <Nav.Item>
                                 <NavLink className="nav-link" to={URLEnum.PROFILE}>Profile</NavLink>
                             </Nav.Item>
                         </Nav>

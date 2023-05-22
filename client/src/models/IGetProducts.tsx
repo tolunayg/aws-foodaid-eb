@@ -1,7 +1,7 @@
 export interface IGetProducts {
     _id:               string;
     name:              string;
-    productCategoryId: number;
+    productCategoryId: string;
     unit:              string;
     fields: {
         [key: string]: string;

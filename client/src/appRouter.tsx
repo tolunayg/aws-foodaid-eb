@@ -19,6 +19,8 @@ import FoodDetail from "./pages/FoodDetail";
 import DistributionPoint from "./pages/DistributionPoint";
 import DistributionPointDetail from "./components/DistributionPointDetail";
 import DistributionPointForm from "./pages/forms/DistributionPointForm";
+import Demands from "./pages/Demands";
+import DemandForm from "./pages/forms/DemandForm";
 
 export const routes =
 <BrowserRouter>
@@ -31,6 +33,8 @@ export const routes =
         <Route path = {URLEnum.PROFILE} element={ <MainLayout component={<Profile />} /> } />
         <Route path = {URLEnum.USERS} element={ <MainLayout component={<Users />} /> } />
         <Route path = {URLEnum.CENTERS} element={ <MainLayout component={<Centers />} /> } />
+        <Route path = {URLEnum.DEMANDS} element={ <MainLayout component={<Demands />} /> } />
+        <Route path = {URLEnum.DEMANDS_ADD} element={ <MainLayout component={<DemandForm />} /> } />
         <Route path = {URLEnum.TRANSPORTS} element={ <MainLayout component={<Transports />} /> } />
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />

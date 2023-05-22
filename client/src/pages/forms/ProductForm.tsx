@@ -3,29 +3,40 @@ import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { createProduct, getProductById, updateProduct } from '../../service';
+import { createProduct, getProductById, updateProduct, getProductCategories } from '../../service';
 import { IGetProducts } from '../../models/IGetProducts';
+import { IGetProductCategory } from '../../models/IGetProductCategories';
 
 enum Mode {
-    Add = 'add',
-    Edit = 'edit'
+  Add = 'add',
+  Edit = 'edit'
 }
 
 type Props = {
-    mode: Mode;
-  };
+  mode: Mode;
+};
 
 interface CustomField {
   name: string;
-  value: string;
+  type: string;
 }
 
+
 function ProductForm() {
-    // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-    const { state } = useLocation();
-    const productId = state?.productId;
-    const mode:Mode = productId ? Mode.Edit : Mode.Add;
+  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { state } = useLocation();
+  const productId = state?.productId;
+  const mode: Mode = productId ? Mode.Edit : Mode.Add;
+  enum FieldType {
+    Numeric = 'numeric',
+    Text = 'text',
+    Boolean = 'boolean',
+  }
+
   const [customFields, setCustomFields] = useState<CustomField[]>([]);
+
+  const [categories, setCategories] = useState<IGetProductCategory[]>([]);
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -33,71 +44,102 @@ function ProductForm() {
       unit: '',
     },
     onSubmit: (values) => {
-        const customFieldsObj: Record<string, string> = {};
-        customFields.forEach((customField) => {
-          customFieldsObj[customField.name] = customField.value;
-        });
-        const newValues = { ...values, customFields: customFieldsObj };
-        console.log(newValues);
-      },
-      
+      const customFieldsObj: Record<string, string> = {};
+      customFields.forEach((customField) => {
+        customFieldsObj[customField.name] = customField.type;
+      });
+      const newValues = { ...values, customFields: customFieldsObj };
+      console.log(newValues);
+      console.log('asdasd')
+    },
+
   });
 
+  const handleCustomFieldTypeChange = (event: ChangeEvent<HTMLSelectElement>, index: number) => {
+    const newCustomFields = [...customFields];
+    newCustomFields[index].type = event.target.value;
+    setCustomFields(newCustomFields);
+  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const accessToken = '123'; // Replace with your actual access token retrieval logic
+        const categoryData = await getProductCategories(accessToken);
+        setCategories(categoryData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+
     // Make API call to get product details based on `productId`
     // Set the initial values
     if (mode === 'edit' && productId) {
-        const fetchData = async () => {
+      const fetchData = async () => {
 
         try {
-            // const accessToken = await getAccessTokenSilently();
-            const accessToken = '123';
-            const data = await getProductById(accessToken, productId);
-            console.log(data);
-            // Set form values from data
-            const updatedInitialValues = {
-              name: data.name,
-              category: data.productCategoryId,
-              unit: data.unit,
-            };
-            // Set the form values from the updated initial values
-            formik.setValues(updatedInitialValues);
+          // const accessToken = await getAccessTokenSilently();
+          const accessToken = '123';
+          const data = await getProductById(accessToken, productId);
+          console.log(data);
+          // Set form values from data
+          const updatedInitialValues = {
+            name: data.name,
+            category: data.productCategoryId,
+            unit: data.unit,
+          };
+          // Set the form values from the updated initial values
+          formik.setValues(updatedInitialValues);
 
 
-            // Create a new object with the custom field names and their values
-            const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, value: String(value) }));
-            console.log(customFieldsData);
-            setCustomFields(customFieldsData);
+          // Create a new object with the custom field names and their values
+          const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, type: 'text', value: String(value) }));
+          console.log('customFieldsData: ', customFieldsData)
+          setCustomFields(customFieldsData);
+
 
         } catch (error) {
-            console.error(error);
+          console.error(error);
         }
-        };
-        fetchData();
+      };
+      fetchData();
     }
-}, [mode, productId]);
- 
+  }, [mode, productId]);
+
 
   const handleAddCustomField = () => {
-    setCustomFields([...customFields, { name: '', value: '' }]);
+    setCustomFields([...customFields, { name: '', type: FieldType.Numeric }]);
   };
+
+  const handleCustomFieldNameChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newCustomFields = [...customFields];
+    newCustomFields[index].name = event.target.value;
+    setCustomFields(newCustomFields);
+  };
+
+  // const handleCustomFieldTypeChange = (event: React.ChangeEvent<HTMLSelectElement>, index: number) => {
+  //   const newCustomFields = [...customFields];
+  //   newCustomFields[index].type = event.target.value;
+  //   setCustomFields(newCustomFields);
+  // };
 
   const handleSubmitButton = async () => {
     const { name, category, unit } = formik.values;
-    const fields = Object.fromEntries(customFields.map(customField => [customField.name, customField.value]));
+    const fields = Object.fromEntries(customFields.map(customField => [customField.name, customField.type]));
 
     const product = {
       name,
-      productCategoryId: Number(category),
+      productCategoryId: category,
       unit,
       fields,
     };
-  
+
     if (mode === 'edit' && productId) {
       console.log("IN EDIT MODE, UPDATE");
       const updatedProduct = await updateProduct('123', productId, product);
-        console.log(updatedProduct);
+      console.log(updatedProduct);
       // TODO: Update product and call
     } else {
       console.log("IN ADD MODE, CREATE");
@@ -112,27 +154,18 @@ function ProductForm() {
       }
     }
   };
-  
 
-  const handleCustomFieldNameChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newCustomFields = [...customFields];
-    newCustomFields[index].name = event.target.value;
-    setCustomFields(newCustomFields);
-  };
 
-  const handleCustomFieldValueChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newCustomFields = [...customFields];
-    newCustomFields[index].value = event.target.value;
-    setCustomFields(newCustomFields);
-  };
+
+
 
   const handleClear = () => {
     formik.resetForm();
     setCustomFields([]);
   };
-  
+
   const headingText = mode === Mode.Add ? 'Add New Food' : 'Edit Food';
-  
+
   return (
 
     <>
@@ -143,9 +176,21 @@ function ProductForm() {
           <Form.Control type="text" id="name" name="name" value={formik.values.name} onChange={formik.handleChange} />
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        {/* <Form.Group className="mb-3">
           <Form.Label>Category</Form.Label>
           <Form.Control type="text" id="category" name="category" value={formik.values.category} onChange={formik.handleChange} />
+        </Form.Group> */}
+
+        <Form.Group className="mb-3">
+          <Form.Label>Category</Form.Label>
+          <Form.Control as="select" id="category" name="category" value={formik.values.category} onChange={formik.handleChange}>
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
+          </Form.Control>
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -156,14 +201,24 @@ function ProductForm() {
         {customFields.map((field, index) => (
           <div className="mb-3" key={index}>
             <Form.Label>Custom Field Name</Form.Label>
-            <Form.Control type="text" value={field.name} onChange={(event: ChangeEvent<HTMLInputElement>) => handleCustomFieldNameChange(event, index)} />
+            <Form.Control
+              type="text"
+              value={field.name}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => handleCustomFieldNameChange(event, index)}
+            />
 
-
-            <Form.Label>Custom Field Value</Form.Label>
-            <Form.Control type="text" value={field.value} onChange={(event: ChangeEvent<HTMLInputElement>) => handleCustomFieldValueChange(event, index)} />
-
+            <Form.Label>Custom Field Type</Form.Label>
+            <Form.Select
+              value={field.type}
+              onChange={(event: ChangeEvent<HTMLSelectElement>) => handleCustomFieldTypeChange(event, index)}
+            >
+              <option value={FieldType.Numeric}>Numeric</option>
+              <option value={FieldType.Text}>Text</option>
+              <option value={FieldType.Boolean}>Boolean</option>
+            </Form.Select>
           </div>
         ))}
+
 
         <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-3">
           <Button variant="primary" type="submit" onClick={handleSubmitButton}>Submit</Button>

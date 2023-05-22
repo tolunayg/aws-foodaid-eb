@@ -7,6 +7,8 @@ export enum URLEnum {
     PROFILE='/profile',
     USERS='/users',
     CENTERS='/centers',
+    DEMANDS='/demands',
+    DEMANDS_ADD='/demands/add',
     TRANSPORTS='/transports',
     FOOD='/food',
     FOOD_ADD='/food/add',

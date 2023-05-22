@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { IGetProducts } from '../models/IGetProducts';
+import { IGetProductCategory } from '../models/IGetProductCategories';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import { URLEnum } from '../RouterEnum';
+import { getProductCategoryById } from '../service';
+
 
 interface Props {
     product?: IGetProducts;
@@ -14,9 +17,26 @@ interface Props {
 
 
 function ProductDetail({ showModal, handleCloseModal, product }: Props) {
+    const [productCategory, setProductCategory] = useState<IGetProductCategory>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const accessToken = '123'; // Replace with your actual access token retrieval logic
+            const category = await getProductCategoryById(accessToken, product?.productCategoryId || '');
+            setProductCategory(category);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+      }, [product]);
+      
+      
 
     const navigate = useNavigate()
-    
+
     const handleEditClicked = (id:string) => {
         console.log("EDIT CLICKED!!");
         navigate('/food/add', { state: { productId: id } });
@@ -29,7 +49,8 @@ function ProductDetail({ showModal, handleCloseModal, product }: Props) {
             </Modal.Header>
             <Modal.Body>
             <p>Description lorem ipsum</p>
-            <p>Category: {product?.productCategoryId}</p>
+            {/* <p>Category: {product?.productCategoryId}</p> */}
+            <p>Category: {productCategory?.name}</p>
             <p>Unit: {product?.unit}</p>
             <p>Id: {product?._id}</p>
             {product && Object.entries(product.fields).map(([key, value]) => (

@@ -102,6 +102,51 @@ export const updateProduct = async (accessToken: string, productId: number, prod
   }
 }
 
+// get all demands
+export const getDemands = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get('/api/demands', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get all product categories
+export const getProductCategories = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get('/api/product-categories', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get product category by id
+export const getProductCategoryById = async (accessToken: string, productCategoryId: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/product-categories/${productCategoryId}`, { headers });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
 
 // get all distributionPoints
@@ -166,3 +211,4 @@ export const updateDistributionPoint = async (accessToken: string, distributionP
     throw error;
   }
 }
+
