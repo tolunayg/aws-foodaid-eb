@@ -1,5 +1,9 @@
 const repository = require('../repository/demand.js')
 const validation = require('./validations/demandValidation.js')
+const constants = require('./constants/demand.js')
+const timeHelper = require('./helpers/time.js')
+
+
 
 exports.getAll = async () => {
     return await repository.getAll();
@@ -18,6 +22,7 @@ exports.getById = async (id) => {
 
 exports.create = async (request) => {
     try {
+        request = setAllItemsAsCreated(request)
         await validation.insertValidations(repository, request._id)
     } catch (error) {
         throw error
@@ -31,6 +36,9 @@ exports.create = async (request) => {
 
 exports.update = async (id, request) => {
     try {
+        await validation.isUpdatable(repository, id)
+        setAllItemsAsCreated(request)
+        request.lastModifiedDate = timeHelper.nowFormatted
         let updated = await repository.update(id, request)
         await validation.isExist(updated.value)
     } catch (error) {
@@ -42,10 +50,17 @@ exports.update = async (id, request) => {
 
 exports.delete = async (id) => {
     try {
+        await validation.isDeletable(repository, id)
         let deleted = await repository.delete(id)
         await validation.isExist(deleted.value)
     } catch (error) {
         throw error
     }
     return true
-} 
+}
+
+setAllItemsAsCreated = (demand) => {
+    return demand.requestItems.forEach(item => {
+        item.status = constants.createdStatus
+    })
+}
