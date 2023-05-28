@@ -1,3 +1,5 @@
+const constants = require('../constants/demand.js')
+
 exports.insertValidations = async (repository, id) => {
     var entityAlreadyExists = await checkIfAnyEntityWithSameId(repository, id)
     if (entityAlreadyExists == true) {
@@ -17,6 +19,36 @@ exports.isExist = async (entity) => {
         error.isBusinessException = true
         throw error
     }
+}
+
+exports.isUpdatable = async (repository, id) => {
+    let demand = await repository.getById(id)
+    if (checkIfAnyItemIsNotInCreatedStatus(demand)) {
+        let error = new Error(`All items should be in created status`)
+        error.name = "InvalidStatus"
+        error.statusCode = 400
+        error.isBusinessException = true
+        throw error
+    }
+}
+
+exports.isDeletable = async (repository, id) => {
+    let demand = await repository.getById(id)
+    if (checkIfAnyItemIsNotInCreatedStatus(demand)) {
+        let error = new Error(`All items should be in created status`)
+        error.name = "InvalidStatus"
+        error.statusCode = 400
+        error.isBusinessException = true
+        throw error
+    }
+}
+
+checkIfAnyItemIsNotInCreatedStatus = async (demand) => {
+    demand.requestItems.forEach(item => {
+        if (item.status != constants.createdStatus) {
+            return true
+        }
+    });
 }
 
 checkIfAnyEntityWithSameId = async (repository, id) => {
