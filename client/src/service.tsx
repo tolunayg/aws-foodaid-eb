@@ -1,14 +1,15 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
+import { IGetInventories } from "./models/IGetInventories";
 //const baseUrl = process.env.REACT_APP_BASE_URL
- const baseUrl = "http://localhost:5000"
+const baseUrl = "http://localhost:5000"
 const baseToken = '123'
 
 
 const config = axios.create({
-    baseURL: baseUrl,
-    timeout: 15000,
-    headers: { 'Content-Type': 'application/json' }
+  baseURL: baseUrl,
+  timeout: 15000,
+  headers: { 'Content-Type': 'application/json' }
 });
 
 const configAuth0 = axios.create({
@@ -71,7 +72,7 @@ export const getProductById = async (accessToken: string, productId: number) => 
 }
 
 // create product
-export const createProduct = async (accessToken: string, product: {} ) => {
+export const createProduct = async (accessToken: string, product: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -87,7 +88,7 @@ export const createProduct = async (accessToken: string, product: {} ) => {
 }
 
 // create product
-export const updateProduct = async (accessToken: string, productId: number, product: {} ) => {
+export const updateProduct = async (accessToken: string, productId: number, product: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -118,7 +119,7 @@ export const getDemands = async (accessToken: string) => {
 }
 
 // create Demand
-export const createDemand = async (accessToken: string, demand: {} ) => {
+export const createDemand = async (accessToken: string, demand: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -197,7 +198,7 @@ export const getDistributionPointById = async (accessToken: string, distribution
 }
 
 // create product
-export const createDistributionPoint = async (accessToken: string, distributionPoint: {} ) => {
+export const createDistributionPoint = async (accessToken: string, distributionPoint: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -213,7 +214,7 @@ export const createDistributionPoint = async (accessToken: string, distributionP
 }
 
 // create product
-export const updateDistributionPoint = async (accessToken: string, distributionPointId: number, distributionPoint: {} ) => {
+export const updateDistributionPoint = async (accessToken: string, distributionPointId: number, distributionPoint: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -228,3 +229,105 @@ export const updateDistributionPoint = async (accessToken: string, distributionP
   }
 }
 
+
+// get all inventoryData
+export const getInventory = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    // const response = await config.get('/api/inventory', { headers });
+    // return response.data;
+
+    return [
+      {
+        _id: "i1",
+        collectionPointId: "cp12345",
+        productId: "p12345",
+        unit: "kg",
+        quantity: 124.12,
+        customFields: { glutensiz: true }
+      },
+      {
+        _id: "i2",
+        collectionPointId: "cp12345",
+        productId: "p12345",
+        unit: "kg",
+        quantity: 12.54,
+        customFields: { glutensiz: false }
+      },
+      {
+        _id: "i3",
+        collectionPointId: "cp12345",
+        productId: "p12346",
+        unit: "litre",
+        quantity: 66,
+        customFields: { yag_orani: 0.18 }
+      },
+      {
+        _id: "i4",
+        collectionPointId: "cp12346",
+        productId: "p12346",
+        unit: "litre",
+        quantity: 12.5,
+        customFields: { yag_orani: 0.18 }
+      },
+    ]
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+// get all collectionPoints
+export const getCollectionPoints = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    // const response = await config.get('/api/inventory', { headers });
+    // return response.data;
+
+    return [
+      {
+        _id: "cp12346",
+        city: "Ankara",
+        district: "Çankaya",
+        collectionPointName: "06Çankaya01",
+        address: "Kızılay"
+      },
+      {
+        _id: "cp12345",
+        city: "Ankara",
+        district: "Çankaya",
+        collectionPointName: "06Çankaya02",
+        address: "Kızılay"
+      }
+    ]
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+
+// add inventory
+export const addInventory = async (accessToken: string, inventory: {}) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/inventory', inventory, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

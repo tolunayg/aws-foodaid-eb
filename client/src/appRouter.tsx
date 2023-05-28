@@ -21,6 +21,8 @@ import DistributionPointDetail from "./components/DistributionPointDetail";
 import DistributionPointForm from "./pages/forms/DistributionPointForm";
 import Demands from "./pages/Demands";
 import DemandForm from "./pages/forms/DemandForm";
+import Inventory from "./pages/Inventory";
+import InventoryForm from "./pages/forms/InventoryForm";
 
 export const routes =
 <BrowserRouter>
@@ -41,6 +43,8 @@ export const routes =
         <Route path = {URLEnum.FOOD_ADD} element={ <MainLayout component={<ProductForm />} /> } />
         <Route path = {URLEnum.DISTRIBUTION_POINT} element={ <MainLayout component={<DistributionPoint />} /> } />
         <Route path = {URLEnum.DISTRIBUTION_POINT_ADD} element={ <MainLayout component={<DistributionPointForm />} /> } />
+        <Route path = {URLEnum.INVENTORY} element={ <MainLayout component={<Inventory />} /> } />
+        <Route path = {URLEnum.INVENTORY_ADD} element={ <MainLayout component={<InventoryForm />} /> } />
         <Route path= '*' element={<ErrorPage/>} />
     </Routes>
 </BrowserRouter>

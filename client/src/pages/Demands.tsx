@@ -39,30 +39,30 @@ function Demands() {
     const value = event.target.value;
     setSelectedDistributionPointId(value === '' ? null : value);
   };
-  
+
 
   return (
     <>
       <h1>Demands</h1>
-  
-       <div className="row mb-3">
-      <div className="col-9">
-        <Form.Select onChange={handleFilterChange}>
-          <option value="">All Distribution Points</option>
-          {distributionPoints.map((point) => (
-            <option key={point._id} value={point._id}>
-              {point.distributionPointName}
-            </option>
-          ))}
-        </Form.Select>
+
+      <div className="row mb-3">
+        <div className="col-9">
+          <Form.Select onChange={handleFilterChange}>
+            <option value="">All Distribution Points</option>
+            {distributionPoints.map((point) => (
+              <option key={point._id} value={point._id}>
+                {point.distributionPointName}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+        <div className="col-3">
+          <NavLink to="/demands/add">
+            <Button variant="success" className="w-100">New Demand</Button>
+          </NavLink>
+        </div>
       </div>
-      <div className="col-3">
-        <NavLink to="/demands/add">
-          <Button variant="success" className="w-100">New Demand</Button>
-        </NavLink>
-      </div>
-    </div>
-  
+
       <Table striped bordered>
         <thead>
           <tr>
@@ -94,7 +94,7 @@ function Demands() {
       </Table>
     </>
   );
-  
+
 }
 
 export default Demands;
