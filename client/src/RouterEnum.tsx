@@ -9,7 +9,7 @@ export enum URLEnum {
     CENTERS='/centers',
     DEMANDS='/demands',
     DEMANDS_ADD='/demands/add',
-    TRANSPORTS='/transports',
+    OPEN_DEMANDS='/open-demands',
     FOOD='/food',
     FOOD_ADD='/food/add',
     DISTRIBUTION_POINT='/distribution-points',

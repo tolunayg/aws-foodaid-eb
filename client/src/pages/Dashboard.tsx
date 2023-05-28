@@ -30,12 +30,12 @@ function Dashboard() {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col key="transports">
-                <Card as={NavLink} to={URLEnum.TRANSPORTS} className="card-hover" >
+              <Col key="open-demands">
+                <Card as={NavLink} to={URLEnum.OPEN_DEMANDS} className="card-hover" >
                   <Card.Body>
-                    <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Transports</Card.Title>
+                    <Card.Title className="text-truncate" style={{maxHeight: '3.6em'}}>Open Demands</Card.Title>
                     <Card.Text className="text-truncate" style={{maxHeight: '3.6em'}}>
-                      This is a summary of transports.
+                      This is a summary of open demands.
                     </Card.Text>
                   </Card.Body>
                 </Card>

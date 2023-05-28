@@ -115,7 +115,7 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                                 <NavLink className="nav-link" to={URLEnum.CENTERS}>Centers</NavLink>
                             </Nav.Item>
                             <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.TRANSPORTS}>Transports</NavLink>
+                                <NavLink className="nav-link" to={URLEnum.OPEN_DEMANDS}>Open Demands</NavLink>
                             </Nav.Item>
                             <Nav.Item>
                                 <NavLink className="nav-link" to={URLEnum.FOOD}>Food</NavLink>

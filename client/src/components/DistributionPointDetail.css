@@ -1,0 +1,7 @@
+.distribution-point-details p {
+  margin: 0;
+}
+
+.distribution-point-details .label {
+  font-weight: bold;
+}

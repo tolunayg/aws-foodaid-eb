@@ -9,7 +9,10 @@ export interface IGetDemands {
 }
 
 export interface RequestItem {
-    productId?:  number;
-    quantity:    number;
-    categoryId?: number;
+    product:        string;
+    quantity:           number;
+    customFields: {
+        [key: string]: string;
+    };
+    status:         string;
 }

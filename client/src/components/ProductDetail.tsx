@@ -7,6 +7,7 @@ import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import { URLEnum } from '../RouterEnum';
 import { getProductCategoryById } from '../service';
+import './ProductDetail.css';
 
 
 interface Props {
@@ -49,13 +50,15 @@ function ProductDetail({ showModal, handleCloseModal, product }: Props) {
             </Modal.Header>
             <Modal.Body>
             <p>Description lorem ipsum</p>
-            {/* <p>Category: {product?.productCategoryId}</p> */}
-            <p>Category: {productCategory?.name}</p>
-            <p>Unit: {product?.unit}</p>
-            <p>Id: {product?._id}</p>
-            {product && Object.entries(product.fields).map(([key, value]) => (
-                <p key={key}>{key}: {value}</p>
-            ))}
+            <div className="product-details">
+              <p><span className="label">Category:</span> {productCategory?.name}</p>
+              <p><span className="label">Unit:</span> {product?.unit}</p>
+              <p><span className="label">Id:</span> {product?._id}</p>
+              {product && Object.entries(product.fields).map(([key, value]) => (
+                <p key={key}><span className="label">{key}:</span> {value}</p>
+              ))}
+            </div>
+
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>

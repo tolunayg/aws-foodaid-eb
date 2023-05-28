@@ -10,7 +10,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
 import Centers from './pages/Centers';
-import Transports from './pages/Transports';
+import OpenDemands from './pages/OpenDemands';
 import Food from './pages/Food';
 import ProductForm from './pages/forms/ProductForm';
 import MainLayout from "./components/MainLayout";
@@ -23,6 +23,7 @@ import Demands from "./pages/Demands";
 import DemandForm from "./pages/forms/DemandForm";
 import Inventory from "./pages/Inventory";
 import InventoryForm from "./pages/forms/InventoryForm";
+import OpenDemandDetail from "./pages/OpenDemandDetail";
 
 export const routes =
 <BrowserRouter>
@@ -37,7 +38,8 @@ export const routes =
         <Route path = {URLEnum.CENTERS} element={ <MainLayout component={<Centers />} /> } />
         <Route path = {URLEnum.DEMANDS} element={ <MainLayout component={<Demands />} /> } />
         <Route path = {URLEnum.DEMANDS_ADD} element={ <MainLayout component={<DemandForm />} /> } />
-        <Route path = {URLEnum.TRANSPORTS} element={ <MainLayout component={<Transports />} /> } />
+        <Route path = {URLEnum.OPEN_DEMANDS} element={ <MainLayout component={<OpenDemands />} /> } />
+        <Route path = "/open-demands/:demandId" element={ <MainLayout component={<OpenDemandDetail />} /> } />
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
         <Route path = {URLEnum.FOOD} element={ <MainLayout component={<Food />} /> } />
         <Route path = {URLEnum.FOOD_ADD} element={ <MainLayout component={<ProductForm />} /> } />

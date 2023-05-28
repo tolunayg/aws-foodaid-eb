@@ -4,9 +4,10 @@ import { Table, Button, Form } from 'react-bootstrap';
 import { IGetDemands } from '../models/IGetDemands';
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
 import { NavLink } from 'react-router-dom';
-import DemandDetail from '../components/DemandDetail';
+import OpenDemandDetailComponent from '../components/OpenDemandDetailComponent';
+import './OpenDemands.css';
 
-function Demands() {
+function OpenDemands() {
   const [demands, setDemands] = useState<IGetDemands[]>([]);
   const [filteredDemands, setFilteredDemands] = useState<IGetDemands[]>([]);
   const [selectedDistributionPointId, setSelectedDistributionPointId] = useState<string | null>(null);
@@ -67,7 +68,7 @@ function Demands() {
 
   return (
     <>
-      <h1>Demands</h1>
+      <h1>OpenDemands</h1>
   
       <div className="row mb-3">
         <div className="col-9">
@@ -122,11 +123,11 @@ function Demands() {
       </Table>
 
   
-      <DemandDetail demand={selectedDemand} showModal={showModal} handleCloseModal={handleCloseModal} />
+      <OpenDemandDetailComponent demand={selectedDemand} showModal={showModal} handleCloseModal={handleCloseModal} />
     </>
   );
   
 
 }
 
-export default Demands;
+export default OpenDemands;

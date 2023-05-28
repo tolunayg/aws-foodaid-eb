@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
 import { IGetInventories } from "./models/IGetInventories";
-//const baseUrl = process.env.REACT_APP_BASE_URL
-const baseUrl = "http://localhost:5000"
+const baseUrl = process.env.REACT_APP_BASE_URL
+// const baseUrl = "http://localhost:5000"
 const baseToken = '123'
 
 
@@ -55,7 +55,7 @@ export const getProducts = async (accessToken: string) => {
 }
 
 // get product by id
-export const getProductById = async (accessToken: string, productId: number) => {
+export const getProductById = async (accessToken: string, productId: string) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
@@ -111,6 +111,23 @@ export const getDemands = async (accessToken: string) => {
   };
   try {
     const response = await config.get('/api/demands', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get demand by id
+export const getDemandById = async (accessToken: string, demandId: number) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/demands/${demandId}`, { headers });
+
     return response.data;
   } catch (error) {
     console.error(error);
@@ -182,7 +199,7 @@ export const getDistributionPoints = async (accessToken: string) => {
 }
 
 // get distributionPoint by id
-export const getDistributionPointById = async (accessToken: string, distributionPointId: number) => {
+export const getDistributionPointById = async (accessToken: string, distributionPointId: string) => {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',

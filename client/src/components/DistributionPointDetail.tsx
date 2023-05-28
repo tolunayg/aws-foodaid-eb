@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
+import './DistributionPointDetail.css';
 
 interface Props {
     distributionPoint?: IGetDistributionPoints;
@@ -27,10 +28,13 @@ function DistributionPointDetail({ showModal, handleCloseModal, distributionPoin
             <Modal.Title>{distributionPoint?.city}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <p>City: {distributionPoint?.city}</p>
-            <p>District: {distributionPoint?.district}</p>
-            <p>DistributionPointName: {distributionPoint?.distributionPointName}</p>
-            <p>Address: {distributionPoint?.address}</p>
+            <div className="distribution-point-details">
+                <p><span className="label">City:</span> {distributionPoint?.city}</p>
+                <p><span className="label">District:</span> {distributionPoint?.district}</p>
+                <p><span className="label">Distribution Point Name:</span> {distributionPoint?.distributionPointName}</p>
+                <p><span className="label">Address:</span> {distributionPoint?.address}</p>
+            </div>
+
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
