@@ -25,7 +25,7 @@ function InventoryForm() {
     onSubmit: async (values) => {
       try {
         const accessToken = '123'; // Replace with your access token retrieval logic
-
+        console.log('API request:', JSON.stringify(values));
         const response = await addInventory(accessToken, values);
         console.log('API response:', response);
         // Handle success response
@@ -138,7 +138,7 @@ function InventoryForm() {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleQuantityChange(event, index)}
               />
             </Form.Group>
-           
+
             {/* Render custom fields for the selected product */}
             {item.product && products.find((product) => product._id === item.product)?.fields && (
               <>
