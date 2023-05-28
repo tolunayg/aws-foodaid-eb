@@ -254,44 +254,24 @@ export const getInventory = async (accessToken: string) => {
     'Content-Type': 'application/json',
   };
   try {
-    // const response = await config.get('/api/inventory', { headers });
-    // return response.data;
+    const response = await config.get('/api/inventories', { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
-    return [
-      {
-        _id: "i1",
-        collectionPointId: "cp12345",
-        productId: "p12345",
-        unit: "kg",
-        quantity: 124.12,
-        customFields: { glutensiz: true }
-      },
-      {
-        _id: "i2",
-        collectionPointId: "cp12345",
-        productId: "p12345",
-        unit: "kg",
-        quantity: 12.54,
-        customFields: { glutensiz: false }
-      },
-      {
-        _id: "i3",
-        collectionPointId: "cp12345",
-        productId: "p12346",
-        unit: "litre",
-        quantity: 66,
-        customFields: { yag_orani: 0.18 }
-      },
-      {
-        _id: "i4",
-        collectionPointId: "cp12346",
-        productId: "p12346",
-        unit: "litre",
-        quantity: 12.5,
-        customFields: { yag_orani: 0.18 }
-      },
-    ]
-
+// add inventory
+export const addInventory = async (accessToken: string, inventory: {}) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/inventories', inventory, { headers });
+    return response.data;
   } catch (error) {
     console.error(error);
     throw error;
@@ -306,25 +286,10 @@ export const getCollectionPoints = async (accessToken: string) => {
     'Content-Type': 'application/json',
   };
   try {
-    // const response = await config.get('/api/inventory', { headers });
-    // return response.data;
+    const response = await config.get('/api/collection-points', { headers });
+    return response.data;
 
-    return [
-      {
-        _id: "cp12346",
-        city: "Ankara",
-        district: "Çankaya",
-        collectionPointName: "06Çankaya01",
-        address: "Kızılay"
-      },
-      {
-        _id: "cp12345",
-        city: "Ankara",
-        district: "Çankaya",
-        collectionPointName: "06Çankaya02",
-        address: "Kızılay"
-      }
-    ]
+
   } catch (error) {
     console.error(error);
     throw error;
@@ -332,16 +297,47 @@ export const getCollectionPoints = async (accessToken: string) => {
 }
 
 
+// get collectionPoints by id
+export const getCollectionPointById = async (accessToken: string, collectionPointId: number) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/collection-points/${collectionPointId}`, { headers });
 
-// add inventory
-export const addInventory = async (accessToken: string, inventory: {}) => {
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create collectionPoints
+export const createCollectionPoint = async (accessToken: string, collectionPoint: {}) => {
   const headers = {
     // Authorization: `Bearer ${accessToken}`,
     Authorization: `Bearer ${baseToken}`,
     'Content-Type': 'application/json',
   };
   try {
-    const response = await config.post('/api/inventory', inventory, { headers });
+    const response = await config.post('/api/collection-points', collectionPoint, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create product
+export const updateCollectionPoint = async (accessToken: string, collectionPointId: number, collectionPoint: {}) => {
+  const headers = {
+    // Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${baseToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.put(`/api/collection-points/${collectionPointId}`, collectionPoint, { headers });
     return response.data;
   } catch (error) {
     console.error(error);
