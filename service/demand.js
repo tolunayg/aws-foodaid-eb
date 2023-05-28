@@ -22,15 +22,12 @@ exports.getById = async (id) => {
 
 exports.create = async (request) => {
     try {
-        request = setAllItemsAsCreated(request)
-        await validation.insertValidations(repository, request._id)
+        setAllItemsAsCreated(request)
+        let result = await repository.create(request)
+        request._id = result.insertedId;
     } catch (error) {
         throw error
     }
-
-    let result = await repository.create(request)
-    request._id = result.insertedId;
-
     return request
 }
 
