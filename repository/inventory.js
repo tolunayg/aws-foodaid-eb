@@ -5,11 +5,11 @@ const collectionName = 'inventories'
 exports.getAll = async () => (await getDb().collection(collectionName).find().toArray())
 exports.getById = async (id) => getDb().collection(collectionName).findOne({ _id: getObjectId(id) })
 exports.getAllById = async (id) => (await getDb().collection(collectionName).find({ _id: getObjectId(id) }).toArray())
-exports.getByCollectionPointProductCustomFields = async (collectionPointId, product, customFields) => getDb().
+exports.getByCollectionPointProductCustomFields = async (collectionPointId, productId, customFields) => getDb().
     collection(collectionName).
     findOne({
         collectionPointId: collectionPointId,
-        product: product,
+        productId: productId,
         customFields: customFields,
     })
 exports.create = async (entity) => getDb().collection(collectionName).insertOne(entity);

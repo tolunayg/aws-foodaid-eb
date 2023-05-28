@@ -237,8 +237,8 @@ export const getInventory = async (accessToken: string) => {
     'Content-Type': 'application/json',
   };
   try {
-    // const response = await config.get('/api/inventory', { headers });
-    // return response.data;
+    const response = await config.get('/api/inventories', { headers });
+    return response.data;
 
     return [
       {
@@ -324,7 +324,7 @@ export const addInventory = async (accessToken: string, inventory: {}) => {
     'Content-Type': 'application/json',
   };
   try {
-    const response = await config.post('/api/inventory', inventory, { headers });
+    const response = await config.post('/api/inventories', inventory, { headers });
     return response.data;
   } catch (error) {
     console.error(error);

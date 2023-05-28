@@ -7,7 +7,7 @@ import { IGetCollectionPoints } from '../../models/IGetCollectionPoints'; // Rep
 
 function InventoryForm() {
   interface IInventoryItem {
-    product: string;
+    productId: string;
     quantity: number;
     customFields: {
       [key: string]: string;
@@ -20,14 +20,12 @@ function InventoryForm() {
   const formik = useFormik({
     initialValues: {
       collectionPointId: '',
-      items: [{ product: '', quantity: 0, customFields: {} }],
+      items: [{ productId: '', quantity: 0, customFields: {} }],
     },
     onSubmit: async (values) => {
       try {
         const accessToken = '123'; // Replace with your access token retrieval logic
-        console.log('API request:', JSON.stringify(values));
         const response = await addInventory(accessToken, values);
-        console.log('API response:', response);
         // Handle success response
       } catch (error) {
         console.error('API error:', error);
@@ -63,13 +61,13 @@ function InventoryForm() {
   }, []);
 
   const handleAddItem = () => {
-    const newItems = [...formik.values.items, { product: '', quantity: 0, customFields: {} }];
+    const newItems = [...formik.values.items, { productId: '', quantity: 0, customFields: {} }];
     formik.setFieldValue('items', newItems);
   };
 
   const handleProductChange = (event: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const newItems = [...formik.values.items];
-    newItems[index].product = event.target.value;
+    newItems[index].productId = event.target.value;
     formik.setFieldValue('items', newItems);
   };
 
@@ -118,7 +116,7 @@ function InventoryForm() {
             <Form.Group className="mb-3">
               <Form.Label>Product</Form.Label>
               <Form.Select
-                value={item.product}
+                value={item.productId}
                 onChange={(event) => handleProductChange(event, index)}
               >
                 <option value="">Select a product</option>
@@ -140,11 +138,11 @@ function InventoryForm() {
             </Form.Group>
 
             {/* Render custom fields for the selected product */}
-            {item.product && products.find((product) => product._id === item.product)?.fields && (
+            {item.productId && products.find((product) => product._id === item.productId)?.fields && (
               <>
                 <Form.Label>Custom Fields</Form.Label>
                 {Object.entries(
-                  (products.find((product) => product._id === item.product)?.fields || {}) as { [key: string]: string }
+                  (products.find((product) => product._id === item.productId)?.fields || {}) as { [key: string]: string }
                 ).map(([field, fieldType]) => (
                   <Form.Group key={field} className="mb-3">
                     <Form.Label>{field}</Form.Label>

@@ -20,7 +20,7 @@ exports.add = async (request) => {
     try {
         for (let index = 0; index < request.items.length; index++) {
             const item = request.items[index];
-            let entity = await repository.getByCollectionPointProductCustomFields(request.collectionPointId, item.product, item.customFields)
+            let entity = await repository.getByCollectionPointProductCustomFields(request.collectionPointId, item.productId, item.customFields)
             if (entity) {
                 entity.quantity += item.quantity
                 entity.collectionPointId = request.collectionPointId
