@@ -6,6 +6,7 @@ const distributionPointRoutes = require('./distributionPoints');
 const productCategoryRoutes = require('./productCategories');
 const demandRoutes = require('./demands');
 const inventoryRoutes = require('./inventories');
+const collectionPointsRoutes = require('./collectionPoints');
 
 // Mount your route files to the router object
 router.use('/restaurants', restaurantRoutes);
@@ -14,5 +15,6 @@ router.use('/distribution-points', distributionPointRoutes);
 router.use('/product-categories', productCategoryRoutes);
 router.use('/demands', demandRoutes);
 router.use('/inventories', inventoryRoutes);
+router.use('/collection-points', collectionPointsRoutes);
 
 module.exports = router;

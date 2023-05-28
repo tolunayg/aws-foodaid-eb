@@ -123,6 +123,9 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                             <Nav.Item>
                                 <NavLink className="nav-link" to={URLEnum.DISTRIBUTION_POINT}>Distribution Points</NavLink>
                             </Nav.Item>
+                            <Nav.Item>
+                                <NavLink className="nav-link" to={URLEnum.COLLECTION_POINT}>Collection Points</NavLink>
+                            </Nav.Item>
                             <hr className="mb-3" />
                             <Nav.Item>
                                 <NavLink className="nav-link" to={URLEnum.DEMANDS}>Demands</NavLink>
