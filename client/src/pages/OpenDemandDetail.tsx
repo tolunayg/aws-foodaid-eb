@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getDemandById, getDistributionPointById, getProductById } from '../service';
+import { getCollectionPoints, getDemandById, getDistributionPointById, getProductById } from '../service';
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
 import { IGetDemands, RequestItem } from '../models/IGetDemands';
 import { Button, Form, Table } from 'react-bootstrap';
 import './OpenDemandDetail.css';
+import { IGetCollectionPoints } from '../models/IGetCollectionPoints';
 
 function OpenDemandDetail() {
   const location = useLocation();
@@ -13,7 +14,8 @@ function OpenDemandDetail() {
   const [demand, setDemand] = useState<IGetDemands | null>(null);
   const [productMap, setProductMap] = useState<{ [key: string]: any }>({});
   const [inventoryMap, setInventoryMap] = useState<{ [key: string]: number }>({});
-
+  const [collectionPoints, setCollectionPoints] = useState<IGetCollectionPoints[]>([])
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +54,17 @@ function OpenDemandDetail() {
     };
 
     fetchData();
+
+    const fetchCollectionPointsData = async () => {
+      try {
+
+        const collectionPointData = await getCollectionPoints('123');
+        setCollectionPoints(collectionPointData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCollectionPointsData();
   }, [demandId]);
 
   return (
@@ -99,12 +112,13 @@ function OpenDemandDetail() {
             <Form.Group controlId="collectionPoint">
               <Form.Label>Collection Point:</Form.Label>
               <Form.Control as="select">
-                <option value="point1">Collection Point 1</option>
-                <option value="point2">Collection Point 2</option>
-                <option value="point3">Collection Point 3</option>
+                {collectionPoints.map((point) => (
+                  <option key={point._id} value={point._id}>{point.collectionPointName}</option>
+                ))}
               </Form.Control>
             </Form.Group>
-  
+
+            <br/>
             <Button variant="primary" onClick={() => console.log("Confirm button clicked")}>
               Confirm
             </Button>

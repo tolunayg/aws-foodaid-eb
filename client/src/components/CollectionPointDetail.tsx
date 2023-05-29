@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { IGetCollectionPoints } from '../models/IGetCollectionPoints';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
+import './CollectionPointDetail.css';
 
 interface Props {
     collectionPoint?: IGetCollectionPoints;
@@ -27,10 +28,13 @@ function CollectionPointDetail({ showModal, handleCloseModal, collectionPoint }:
             <Modal.Title>{collectionPoint?.city}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <p>City: {collectionPoint?.city}</p>
-            <p>District: {collectionPoint?.district}</p>
-            <p>Collection Point Name: {collectionPoint?.collectionPointName}</p>
-            <p>Address: {collectionPoint?.address}</p>
+            <div className="collection-point-details">
+                <p><span className="label">City:</span> {collectionPoint?.city}</p>
+                <p><span className="label">District:</span> {collectionPoint?.district}</p>
+                <p><span className="label">Collection Point Name:</span> {collectionPoint?.collectionPointName}</p>
+                <p><span className="label">Address:</span> {collectionPoint?.address}</p>
+            </div>
+
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
