@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt")
 
 exports.getAll = async () => {
     try {
-        let users = await repository.getAll();
+        var users = await repository.getAll();
+        console.log(users)
         users.forEach(user => {
             delete user.password
         });
@@ -20,7 +21,6 @@ exports.getById = async (id) => {
     try {
         var user = await repository.getById(id)
         await validation.isExist(user)
-        console.log(user)
         delete user.password
     } catch (error) {
         throw error
@@ -35,6 +35,10 @@ exports.create = async (user) => {
         await validation.isUsernameDuplicated(userDb)
 
         user.password = bcrypt.hashSync(user.password, 10)
+
+        for (let index = 0; index < user.roles.length; index++) {
+            user.roles[index] = user.roles[index].toLowerCase()
+        }
 
         let result = await repository.create(user)
         user._id = result.insertedId;
@@ -57,6 +61,10 @@ exports.update = async (id, user) => {
         }
 
         user.password = userDb.password
+
+        for (let index = 0; index < user.roles.length; index++) {
+            user.roles[index] = user.roles[index].toLowerCase()
+        }
 
         let updated = await repository.update(id, user)
         await validation.isExist(updated.value)
