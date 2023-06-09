@@ -75,6 +75,22 @@ exports.update = async (id, user) => {
     return true;
 }
 
+exports.updatePassword = async (id, body) => {
+    try {
+        let user = await repository.getById(id)
+        await validation.isExist(user)
+
+        user.password = bcrypt.hashSync(body.password, 10)
+
+        let updated = await repository.update(id, user)
+        await validation.isExist(updated.value)
+    } catch (error) {
+        throw error
+    }
+
+    return true;
+}
+
 exports.delete = async (id) => {
     try {
         let deleted = await repository.delete(id)

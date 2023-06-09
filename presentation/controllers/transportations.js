@@ -1,4 +1,4 @@
-const service = require('../../service/user.js');
+const service = require('../../service/transportation.js');
 
 exports.getAll = async (req, res) => {
     try {
@@ -49,42 +49,10 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
+exports.approve = async (req, res) => {
   try {
-    const updated = await service.update(req.params.id, req.body)
-    res.status(200).json(updated.value);
-  } catch (err) {
-    console.error(err);
-
-    if (err.isBusinessException == false) {
-      err.statusCode = 500
-      err.message = 'Server Error'
-    }
-
-    res.status(err.statusCode).json({ message: err.message });
-  }
-};
-
-exports.updatePassword = async (req, res) => {
-  try {
-    const updated = await service.updatePassword(req.params.id, req.body)
-    res.status(200).json(updated.value);
-  } catch (err) {
-    console.error(err);
-
-    if (err.isBusinessException == false) {
-      err.statusCode = 500
-      err.message = 'Server Error'
-    }
-
-    res.status(err.statusCode).json({ message: err.message });
-  }
-};
-
-exports.delete = async (req, res) => {
-  try {
-    await service.delete(req.params.id)
-    res.status(200).json({ message: 'User is deleted successfully' });
+    const approved = await service.approve(req.params.id, req.user.user_id);
+    res.status(201).json(approved);
   } catch (err) {
     console.error(err);
 
