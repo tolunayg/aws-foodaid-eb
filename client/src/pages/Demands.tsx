@@ -17,10 +17,11 @@ function Demands() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const demandData = await getDemands('123');
+        const accessToken = localStorage.getItem('token');
+        const demandData = await getDemands(accessToken!);
         setDemands(demandData);
 
-        const distributionPointData = await getDistributionPoints('123');
+        const distributionPointData = await getDistributionPoints(accessToken!);
         setDistributionPoints(distributionPointData);
       } catch (error) {
         console.error(error);
@@ -67,7 +68,7 @@ function Demands() {
 
   return (
     <>
-      <h1>Demands</h1>
+      <h1 className="display-4">Demands</h1>
   
       <div className="row mb-3">
         <div className="col-9">

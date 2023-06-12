@@ -3,8 +3,6 @@ import { IGetProducts } from "./models/IGetProducts";
 import { IGetInventories } from "./models/IGetInventories";
 const baseUrl = process.env.REACT_APP_BASE_URL
 // const baseUrl = "http://localhost:5000"
-const baseToken = '123'
-
 
 const config = axios.create({
   baseURL: baseUrl,
@@ -12,37 +10,30 @@ const config = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
-const configAuth0 = axios.create({
-  baseURL: 'https://fars-metu.eu.auth0.com/oauth/token',
-  timeout: 15000,
-  headers: {
-    'Content-Type': 'application/json',
-    'audience': 'https://fars-metu.eu.auth0.com/api/v2/',
-    'client_id': 'KGW6SDS3zMrecFa5XX3XnJjUoTIszDWu',
-    'client_secret': 'A7kjY0HwyAVO0yL_fgqKVnfcjyrTVWGVTCyrZY7Zi1DZ0KRGIuSqMi5z_rHB96d9',
-    'grant_type': 'password'
-  },
-  withCredentials: true
-});
-
 export const login = async (username: string, password: string) => {
   const headers = {
+    'Content-Type': 'application/json',
+  };
+  const requestBody = {
     username: username,
-    password: password
+    password: password,
   };
   try {
-    return await configAuth0.get('/oauth/token', { headers });
+    const response = await config.post('/api/auth/login', requestBody, { headers });
+    console.log("response", response)
+    return response.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
+
 // get all products
 export const getProducts = async (accessToken: string) => {
+
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -57,8 +48,7 @@ export const getProducts = async (accessToken: string) => {
 // get product by id
 export const getProductById = async (accessToken: string, productId: string) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -74,8 +64,7 @@ export const getProductById = async (accessToken: string, productId: string) => 
 // create product
 export const createProduct = async (accessToken: string, product: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -90,8 +79,7 @@ export const createProduct = async (accessToken: string, product: {}) => {
 // create product
 export const updateProduct = async (accessToken: string, productId: number, product: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -121,8 +109,7 @@ export const getDemands = async (accessToken: string) => {
 // get demand by id
 export const getDemandById = async (accessToken: string, demandId: number) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -138,8 +125,7 @@ export const getDemandById = async (accessToken: string, demandId: number) => {
 // create Demand
 export const createDemand = async (accessToken: string, demand: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -217,8 +203,7 @@ export const getDistributionPointById = async (accessToken: string, distribution
 // create product
 export const createDistributionPoint = async (accessToken: string, distributionPoint: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -233,8 +218,7 @@ export const createDistributionPoint = async (accessToken: string, distributionP
 // create product
 export const updateDistributionPoint = async (accessToken: string, distributionPointId: number, distributionPoint: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -265,8 +249,7 @@ export const getInventory = async (accessToken: string) => {
 // add inventory
 export const addInventory = async (accessToken: string, inventory: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -316,8 +299,7 @@ export const getCollectionPointById = async (accessToken: string, collectionPoin
 // create collectionPoints
 export const createCollectionPoint = async (accessToken: string, collectionPoint: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
@@ -332,12 +314,93 @@ export const createCollectionPoint = async (accessToken: string, collectionPoint
 // create product
 export const updateCollectionPoint = async (accessToken: string, collectionPointId: number, collectionPoint: {}) => {
   const headers = {
-    // Authorization: `Bearer ${accessToken}`,
-    Authorization: `Bearer ${baseToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   try {
     const response = await config.put(`/api/collection-points/${collectionPointId}`, collectionPoint, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+// get all transportations
+export const getTransportations = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get('/api/transportations', { headers });
+    return response.data;
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// create transportation
+export const createTransportation = async (accessToken: string, transportation: {}) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/transportations', transportation, { headers });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// approve transportation by id
+export const approveTransportationById = async (accessToken: string, transportationId: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.patch(`/api/transportations/${transportationId}/approve`, {}, { headers });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+
+// get all users
+export const getUsers = async (accessToken: string) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get('/api/users', { headers });
+    return response.data;
+
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+// get user by id
+export const getUserById = async (accessToken: string, userId: number) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.get(`/api/users/${userId}`, { headers });
+
     return response.data;
   } catch (error) {
     console.error(error);

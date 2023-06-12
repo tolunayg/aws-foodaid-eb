@@ -30,7 +30,8 @@ exports.create = async (transportation) => {
 
         transportation.transportationItems = new Array()
         transportation.loadingDate = timeHelper.nowFormatted
-        console.log(transportation)
+        transportation.distributionPointId = demand.distributionPointId;
+        // console.log(transportation)
         for (let index = 0; index < demand.requestItems.length; index++) {
             const requestItem = demand.requestItems[index];
             var inventory = await inventoryRepository.getByCollectionPointProductCustomFields(transportation.collectionPointId, requestItem.product, requestItem.customFields)

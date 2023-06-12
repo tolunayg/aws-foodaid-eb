@@ -11,11 +11,18 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
     const navigate = useNavigate()
+
+    // Retrieve the user object from localStorage or any other storage mechanism
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const roles = user?.roles || [];
+    const username = user?.name || 'User'; // Retrieve the name from the user object or use a default value
+
     const fncLogOut = () => {
-        // localStorage.removeItem('token')
-        // sessionStorage.removeItem('token')
-        // localStorage.removeItem('username')
-        navigate(URLEnum.HOME)
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate(URLEnum.BASE);
+        // window.location.href = URLEnum.BASE;
+        // window.location.replace(URLEnum.HOME);
     }
 
     const navigateToDashboard = () => {
@@ -62,7 +69,6 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
         ? "sidebar-expanded"
         : "sidebar-collapsed";
 
-    const { logout } = useAuth0();
 
     return (
         <>
@@ -83,13 +89,13 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                         <ul className="navbar-nav me-auto mb-lg-0">
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    User
+                                    {username}
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><a className="dropdown-item" href="#">Action</a></li>
                                     <li><a className="dropdown-item" href="#">Another action</a></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item"  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</a></li>
+                                    <li><a className="dropdown-item" onClick={fncLogOut} href="#">Logout</a></li>
                                     {/* <li><button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
                                         Log Out
                                         </button></li> */}
@@ -108,36 +114,56 @@ function MainLayout(item: { token?: string, username?: string, component: JSX.El
                     {/* <div className="collapse sidebar-collapse d-md-block" id="sidebarSupportedContent"> */}
                     <div className={`sidebar ${sidebarClass}`} id="sidebarSupportedContent">
                         <Nav className="flex-column" id="sidebar">
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.USERS}>Users</NavLink>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.CENTERS}>Centers</NavLink>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.OPEN_DEMANDS}>Open Demands</NavLink>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.FOOD}>Food</NavLink>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.DISTRIBUTION_POINT}>Distribution Points</NavLink>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.COLLECTION_POINT}>Collection Points</NavLink>
-                            </Nav.Item>
-                            <hr className="mb-3" />
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.DEMANDS}>Demands</NavLink>
-                            </Nav.Item>
-                            <hr className="mb-3" />
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.INVENTORY}>Inventory</NavLink>
-                            </Nav.Item>
-                            <hr className="mb-3" />
-                            <Nav.Item>
-                                <NavLink className="nav-link" to={URLEnum.PROFILE}>Profile</NavLink>
-                            </Nav.Item>
+                            {roles.includes('management-staff') && (
+                            <>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.FOOD}>Food</NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.DISTRIBUTION_POINT}>Distribution Points</NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.COLLECTION_POINT}>Collection Points</NavLink>
+                                </Nav.Item>
+                                {/* <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.INVENTORY}>Inventory</NavLink>
+                                </Nav.Item> */}
+                            </>
+                            )}
+                            {roles.includes('admin') && (
+                            <>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.USERS}>Users</NavLink>
+                                </Nav.Item>
+                            </>
+                            )}
+                            {roles.includes('distribution-staff') && (
+                            <>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.DEMANDS}>Demands</NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.TRANSPORTATION}>Transportation</NavLink>
+                                </Nav.Item>
+                            </>
+                            )}
+                            {roles.includes('collection-staff') && (
+                            <>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.INVENTORY}>Inventory</NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.TRANSPORTATION}>Transportation</NavLink>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <NavLink className="nav-link" to={URLEnum.OPEN_DEMANDS}>Open Demands</NavLink>
+                                </Nav.Item>
+                            </>
+                            )}
+                            
+                           
+                            {/* <hr className="mb-3" /> */}
+                            
                         </Nav>
 
                     </div>

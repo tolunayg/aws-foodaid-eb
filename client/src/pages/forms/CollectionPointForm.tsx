@@ -2,8 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createCollectionPoint, getCollectionPointById, updateCollectionPoint } from '../../service';
+import { URLEnum } from '../../RouterEnum';
 
 enum Mode {
     Add = 'add',
@@ -20,6 +21,8 @@ interface CustomField {
 }
 
 function CollectionPointForm() {
+  const navigate = useNavigate()
+
     // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { state } = useLocation();
     const collectionPointId = state?.collectionPointId;
@@ -39,6 +42,7 @@ function CollectionPointForm() {
         });
         const newValues = { ...values, customFields: customFieldsObj };
         console.log(newValues);
+        navigate(URLEnum.COLLECTION_POINT);
       },
       
   });
@@ -51,8 +55,9 @@ function CollectionPointForm() {
 
         try {
             // const accessToken = await getAccessTokenSilently();
-            const accessToken = '123';
-            const data = await getCollectionPointById(accessToken, collectionPointId);
+            const accessToken = localStorage.getItem('token');
+
+            const data = await getCollectionPointById(accessToken!, collectionPointId);
             console.log(data);
             // Set form values from data
             const updatedInitialValues = {
@@ -134,7 +139,7 @@ function CollectionPointForm() {
   return (
 
     <>
-      <h1>{headingText}</h1>
+      <h1 className="display-4">{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
           <Form.Label>City</Form.Label>

@@ -26,6 +26,7 @@ import InventoryForm from "./pages/forms/InventoryForm";
 import OpenDemandDetail from "./pages/OpenDemandDetail";
 import CollectionPoint from "./pages/CollectionPoint";
 import CollectionPointForm from "./pages/forms/CollectionPointForm";
+import Transportation from "./pages/Transportation";
 
 export const routes =
 <BrowserRouter>
@@ -51,6 +52,7 @@ export const routes =
         <Route path = {URLEnum.INVENTORY_ADD} element={ <MainLayout component={<InventoryForm />} /> } />
         <Route path = {URLEnum.COLLECTION_POINT} element={ <MainLayout component={<CollectionPoint />} /> } />
         <Route path = {URLEnum.COLLECTION_POINT_ADD} element={ <MainLayout component={<CollectionPointForm />} /> } />
+        <Route path = {URLEnum.TRANSPORTATION} element={ <MainLayout component={<Transportation />} /> } />
         <Route path= '*' element={<ErrorPage/>} />
     </Routes>
 </BrowserRouter>

@@ -18,10 +18,11 @@ function OpenDemands() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const demandData = await getDemands('123');
+        const accessToken = localStorage.getItem('token');
+        const demandData = await getDemands(accessToken!);
         setDemands(demandData);
 
-        const distributionPointData = await getDistributionPoints('123');
+        const distributionPointData = await getDistributionPoints(accessToken!);
         setDistributionPoints(distributionPointData);
       } catch (error) {
         console.error(error);
@@ -68,10 +69,10 @@ function OpenDemands() {
 
   return (
     <>
-      <h1>OpenDemands</h1>
+      <h1 className="display-4">OpenDemands</h1>
   
       <div className="row mb-3">
-        <div className="col-9">
+        <div className="col-4">
           <Form.Select onChange={handleFilterChange}>
             <option value="">All Distribution Points</option>
             {distributionPoints.map((point) => (
@@ -81,13 +82,7 @@ function OpenDemands() {
             ))}
           </Form.Select>
         </div>
-        <div className="col-3">
-          <NavLink to="/demands/add">
-            <Button variant="success" className="w-100">
-              New Demand
-            </Button>
-          </NavLink>
-        </div>
+        
       </div>
   
       <Table striped bordered>
@@ -123,7 +118,12 @@ function OpenDemands() {
       </Table>
 
   
-      <OpenDemandDetailComponent demand={selectedDemand} showModal={showModal} handleCloseModal={handleCloseModal} />
+      <OpenDemandDetailComponent
+        demand={selectedDemand}
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        demandStatus={selectedDemand ? getStatus(selectedDemand) : ''}
+      />
     </>
   );
   

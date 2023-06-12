@@ -50,7 +50,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #033C73;
+    background-color: #796465;
     /* background-image: linear-gradient(to right, #033C73, #265c8f); */
     border-right: 1px solid #dee2e6;
     transition: 0.2s ease-in-out;
@@ -135,7 +135,7 @@ ListItem {
 
 aside {
     border-right: 1px solid #ededed;
-    background: #033C73;
+    background: #796465;
     flex: 1 0 10%;
     padding: 1rem;
     min-width: 300px;

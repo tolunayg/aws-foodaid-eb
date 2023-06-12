@@ -7,6 +7,7 @@ exports.login = async (authRequest) => {
     var token =""
     try {
         let user = await userRepository.getByUsername(authRequest.username)
+        console.log('user', user)
         await validation.isUserExist(user)
         let isLoggedIn = bcrypt.compareSync(authRequest.password, user.password)
         await validation.isCorrectPassword(isLoggedIn)

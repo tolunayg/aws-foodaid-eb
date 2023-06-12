@@ -17,8 +17,8 @@ function DistributionPoint() {
     const fetchData = async () => {
 
       try {
-        // const accessToken = await getAccessTokenSilently();
-        const data = await getDistributionPoints('123');
+        const accessToken = localStorage.getItem('token');
+        const data = await getDistributionPoints(accessToken!);
         setDistributionPointData(data);
 
       } catch (error) {
@@ -41,7 +41,7 @@ function DistributionPoint() {
 
   return (
     <>
-      <h1>Distribution Point</h1>
+      <h1 className="display-4">Distribution Point</h1>
 
       <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         <NavLink to="/distribution-points/add">

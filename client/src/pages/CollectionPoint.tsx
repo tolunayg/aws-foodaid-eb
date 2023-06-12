@@ -16,8 +16,8 @@ function CollectionPoint() {
     const fetchData = async () => {
 
       try {
-        // const accessToken = await getAccessTokenSilently();
-        const data = await getCollectionPoints('123');
+        const accessToken = localStorage.getItem('token');
+        const data = await getCollectionPoints(accessToken!);
         setCollectionPointData(data);
 
       } catch (error) {
@@ -40,7 +40,7 @@ function CollectionPoint() {
 
   return (
     <>
-      <h1>Collection Point</h1>
+      <h1 className="display-4">Collection Point</h1>
 
       <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
         <NavLink to="/collection-points/add">

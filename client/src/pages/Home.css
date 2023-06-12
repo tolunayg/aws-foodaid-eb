@@ -1,0 +1,46 @@
+.card-hover {
+  text-decoration: none;
+  color: #212529;
+  /* From https://css.glass */
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  z-index: 1;
+}
+
+.card.card-hover:hover:not(.card-special) {
+  background-color: #D7B29D !important;
+  color: white;
+  filter: brightness(125%);
+  border: 1px solid #ccc;
+}
+
+.card1 {
+  background-color: #DDE8B9 !important;
+  color: black !important;
+}
+.card2 {
+  background-color: #E8D2AE !important;
+  color: black !important;
+
+}
+.card3 {
+  background-color: #D7B29D !important;
+  color: black !important;
+
+}
+.card4 {
+  background-color: #CB8589 !important;
+
+}
+.card5 {
+  background-color: #796465 !important;
+}
+
+.card-special:hover {
+  filter: brightness(125%);
+  border: 1px solid #ccc;
+}

@@ -15,18 +15,19 @@ interface Props {
     demand?: IGetDemands;
     showModal: boolean;
     handleCloseModal: () => void;
+    demandStatus: string
   }
 
 
-function OpenDemandDetailComponent({ showModal, handleCloseModal, demand }: Props) {
+function OpenDemandDetailComponent({ showModal, handleCloseModal, demand, demandStatus }: Props) {
     const [distributionPointName, setDistributionPointName] = useState('');
     const [products, setProducts] = useState<IGetProducts[]>([]);
     
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const accessToken = '123'; // Replace with your actual access token retrieval logic
-            const distributionPoint = await getDistributionPointById(accessToken, demand?.distributionPointId || '');
+            const accessToken = localStorage.getItem('token');
+            const distributionPoint = await getDistributionPointById(accessToken!, demand?.distributionPointId || '');
             setDistributionPointName(distributionPoint.distributionPointName);
           } catch (error) {
             console.error(error);
@@ -38,11 +39,11 @@ function OpenDemandDetailComponent({ showModal, handleCloseModal, demand }: Prop
         // Fetch product details and retrieve names from the product id
         const fetchProducts = async () => {
           try {
-            const accessToken = '123'; // Replace with your actual access token retrieval logic
+            const accessToken = localStorage.getItem('token');
             const products: IGetProducts[] = [];
     
             for (const requestItem of demand?.requestItems || []) {
-              const product = await getProductById(accessToken, requestItem.product);
+              const product = await getProductById(accessToken!, requestItem.product);
               products.push(product);
             }
     
@@ -97,15 +98,14 @@ function OpenDemandDetailComponent({ showModal, handleCloseModal, demand }: Prop
 
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="success" onClick={() => demand?._id && handleContinueClicked(demand._id)}>
-                Continue with Demand
-            </Button>
-            <Button variant="secondary" onClick={handleCloseModal}>
+            {demandStatus !== 'COMPLETED' && (
+                <Button variant="success" onClick={() => demand?._id && handleContinueClicked(demand._id)}>
+                  Continue with Demand
+                </Button>
+              )}
+              <Button variant="secondary" onClick={handleCloseModal}>
                 Close
-            </Button>
-            {/* <Button variant="primary" onClick={() => demand?._id && handleEditClicked(demand._id)}>
-                Edit
-            </Button> */}
+              </Button>
             </Modal.Footer>
         </Modal>
         );

@@ -23,13 +23,14 @@ function Inventory() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const inventoryData = await getInventory('123');
+                const accessToken = localStorage.getItem('token');
+                const inventoryData = await getInventory(accessToken!);
                 setInventories(inventoryData);
 
-                const collectionPointData = await getCollectionPoints('123');
+                const collectionPointData = await getCollectionPoints(accessToken!);
                 setCollectionPoints(collectionPointData);
 
-                const productData = await getProducts('123');
+                const productData = await getProducts(accessToken!);
                 setProducts(productData);
             } catch (error) {
                 console.error(error);
@@ -49,7 +50,7 @@ function Inventory() {
 
     return (
         <>
-            <h1>Inventory</h1>
+            <h1 className="display-4">Inventory</h1>
 
             <div className="row mb-3">
                 <div className="col-9">

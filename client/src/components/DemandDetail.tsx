@@ -25,8 +25,8 @@ function DemandDetail({ showModal, handleCloseModal, demand }: Props) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const accessToken = '123'; // Replace with your actual access token retrieval logic
-            const distributionPoint = await getDistributionPointById(accessToken, demand?.distributionPointId || '');
+            const accessToken = localStorage.getItem('token');
+            const distributionPoint = await getDistributionPointById(accessToken!, demand?.distributionPointId || '');
             setDistributionPointName(distributionPoint.distributionPointName);
           } catch (error) {
             console.error(error);
@@ -38,11 +38,11 @@ function DemandDetail({ showModal, handleCloseModal, demand }: Props) {
         // Fetch product details and retrieve names from the product id
         const fetchProducts = async () => {
           try {
-            const accessToken = '123'; // Replace with your actual access token retrieval logic
+            const accessToken = localStorage.getItem('token');
             const products: IGetProducts[] = [];
     
             for (const requestItem of demand?.requestItems || []) {
-              const product = await getProductById(accessToken, requestItem.product);
+              const product = await getProductById(accessToken!, requestItem.product);
               products.push(product);
             }
     

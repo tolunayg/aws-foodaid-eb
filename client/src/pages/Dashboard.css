@@ -11,10 +11,36 @@
     z-index: 1;
 }
 
-.card.card-hover:hover {
-    background-color: #097d6c !important;
+.card.card-hover:hover:not(.card-special) {
+    background-color: #796465 !important;
     color: white;
     filter: brightness(125%);
     border: 1px solid #ccc;
   }
   
+.card1 {
+    background-color: #DDE8B9 !important;
+    color: black !important;
+}
+.card2 {
+    background-color: #E8D2AE !important;
+    color: black !important;
+
+}
+.card3 {
+    background-color: #D7B29D !important;
+    color: black !important;
+
+}
+.card4 {
+    background-color: #CB8589 !important;
+
+}
+.card5 {
+    background-color: #796465 !important;
+}
+
+.card-special:hover {
+    filter: brightness(125%);
+    border: 1px solid #ccc;
+}

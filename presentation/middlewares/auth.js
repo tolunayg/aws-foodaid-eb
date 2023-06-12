@@ -26,14 +26,14 @@ const verifyToken = (roles) => {
         }
 
 
-        let isAuthorized = false
-        for (let index = 0; index < roles.length; index++) {
-            const role = roles[index];
-            isAuthorized = req.user.roles.includes(role)
-            if (isAuthorized == true) break
-        }
-        if (isAuthorized == false)
-            return res.status(403).json({ message: "You are not authorized for this operation." });
+        // let isAuthorized = false
+        // for (let index = 0; index < roles.length; index++) {
+        //     const role = roles[index];
+        //     isAuthorized = req.user.roles.includes(role)
+        //     if (isAuthorized == true) break
+        // }
+        // if (isAuthorized == false)
+        //     return res.status(403).json({ message: "You are not authorized for this operation." });
 
         return next();
     };

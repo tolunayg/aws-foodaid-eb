@@ -17,9 +17,8 @@ function Food() {
     const fetchData = async () => {
 
       try {
-        // const accessToken = await getAccessTokenSilently();
-        // const data = await getProducts(accessToken!);
-        const data = await getProducts('123');
+        const accessToken = localStorage.getItem('token');
+        const data = await getProducts(accessToken!);
         setProductData(data);
 
       } catch (error) {
@@ -42,7 +41,7 @@ function Food() {
 
   return (
     <>
-        <h1>Food</h1>
+        <h1 className="display-4">Food</h1>
 
         <div className="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
           <NavLink to="/food/add">

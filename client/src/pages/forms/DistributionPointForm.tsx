@@ -2,9 +2,10 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createDistributionPoint, getDistributionPointById, updateDistributionPoint } from '../../service';
 import { IGetDistributionPoints } from '../../models/IGetDistributionPoints';
+import { URLEnum } from '../../RouterEnum';
 
 enum Mode {
     Add = 'add',
@@ -21,6 +22,8 @@ interface CustomField {
 }
 
 function DistributionPointForm() {
+  const navigate = useNavigate()
+
     // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { state } = useLocation();
     const distributionPointId = state?.distributionPointId;
@@ -40,6 +43,7 @@ function DistributionPointForm() {
         });
         const newValues = { ...values, customFields: customFieldsObj };
         console.log(newValues);
+        navigate(URLEnum.DISTRIBUTION_POINT);
       },
       
   });
@@ -52,9 +56,8 @@ function DistributionPointForm() {
         const fetchData = async () => {
 
         try {
-            // const accessToken = await getAccessTokenSilently();
-            const accessToken = '123';
-            const data = await getDistributionPointById(accessToken, distributionPointId);
+            const accessToken = localStorage.getItem('token');
+            const data = await getDistributionPointById(accessToken!, distributionPointId);
             console.log(data);
             // Set form values from data
             const updatedInitialValues = {
@@ -139,7 +142,7 @@ function DistributionPointForm() {
   return (
 
     <>
-      <h1>{headingText}</h1>
+      <h1 className="display-4">{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
       <Form.Group className="mb-3">
           <Form.Label>City</Form.Label>

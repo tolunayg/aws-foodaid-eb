@@ -17,5 +17,6 @@ export enum URLEnum {
     INVENTORY='/inventories',
     INVENTORY_ADD='/inventories/add',
     COLLECTION_POINT='/collection-points',
-    COLLECTION_POINT_ADD='/collection-points/add'
+    COLLECTION_POINT_ADD='/collection-points/add',
+    TRANSPORTATION='/transportation'
 } 

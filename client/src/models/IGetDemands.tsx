@@ -9,10 +9,12 @@ export interface IGetDemands {
 }
 
 export interface RequestItem {
-    product:        string;
-    quantity:           number;
+    product:                string;
+    quantity:               number;
+    satisfiedQuantity:      number;
+    unSatisfiedQuantity:    number;
     customFields: {
-        [key: string]: string;
+        [key: string]:      string;
     };
-    status:         string;
+    status:                 string;
 }

@@ -23,8 +23,8 @@ function ProductDetail({ showModal, handleCloseModal, product }: Props) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const accessToken = '123'; // Replace with your actual access token retrieval logic
-            const category = await getProductCategoryById(accessToken, product?.productCategoryId || '');
+            const accessToken = localStorage.getItem('token');
+            const category = await getProductCategoryById(accessToken!, product?.productCategoryId || '');
             setProductCategory(category);
           } catch (error) {
             console.error(error);

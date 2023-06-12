@@ -2,10 +2,11 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createProduct, getProductById, updateProduct, getProductCategories } from '../../service';
 import { IGetProducts } from '../../models/IGetProducts';
 import { IGetProductCategory } from '../../models/IGetProductCategories';
+import { URLEnum } from '../../RouterEnum';
 
 enum Mode {
   Add = 'add',
@@ -23,6 +24,7 @@ interface CustomField {
 
 
 function ProductForm() {
+  const navigate = useNavigate()
   // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const { state } = useLocation();
   const productId = state?.productId;
@@ -50,7 +52,7 @@ function ProductForm() {
       });
       const newValues = { ...values, customFields: customFieldsObj };
       console.log(newValues);
-      console.log('asdasd')
+      navigate(URLEnum.FOOD);
     },
 
   });
@@ -64,8 +66,8 @@ function ProductForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const accessToken = '123'; // Replace with your actual access token retrieval logic
-        const categoryData = await getProductCategories(accessToken);
+        const accessToken = localStorage.getItem('token');
+        const categoryData = await getProductCategories(accessToken!);
         setCategories(categoryData);
       } catch (error) {
         console.error(error);
@@ -81,8 +83,8 @@ function ProductForm() {
 
         try {
           // const accessToken = await getAccessTokenSilently();
-          const accessToken = '123';
-          const data = await getProductById(accessToken, productId);
+          const accessToken = localStorage.getItem('token');
+          const data = await getProductById(accessToken!, productId);
           console.log(data);
           // Set form values from data
           const updatedInitialValues = {
@@ -169,7 +171,7 @@ function ProductForm() {
   return (
 
     <>
-      <h1>{headingText}</h1>
+      <h1 className="display-4">{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
