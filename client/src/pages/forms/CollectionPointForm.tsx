@@ -98,13 +98,15 @@ function CollectionPointForm() {
       fields,
     };
 
+    const accessToken = localStorage.getItem('token');
+    
     if (mode === 'edit' && collectionPointName) {
       console.log("IN EDIT MODE, UPDATE");
-      const updatedCollectionPoint = await updateCollectionPoint('123', collectionPointId, collectionPoint);
+      const updatedCollectionPoint = await updateCollectionPoint(accessToken!, collectionPointId, collectionPoint);
     } else {
       console.log("IN ADD MODE, CREATE");
       try {
-        const createdCollectionPoint = await createCollectionPoint('123', collectionPoint);
+        const createdCollectionPoint = await createCollectionPoint(accessToken!, collectionPoint);
         console.log(createdCollectionPoint);
         // TODO: Handle successful creation
       } catch (error) {

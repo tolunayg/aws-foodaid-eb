@@ -98,16 +98,18 @@ function DistributionPointForm() {
       fields,
     };
   
+    const accessToken = localStorage.getItem('token');
+
     if (mode === 'edit' && distributionPointId) {
       console.log("IN EDIT MODE, UPDATE");
-      const updatedDistributionPoint = await updateDistributionPoint('123', distributionPointId, distributionPoint);
+      const updatedDistributionPoint = await updateDistributionPoint(accessToken!, distributionPointId, distributionPoint);
         console.log(updatedDistributionPoint);
       // TODO: Update distributionPoint and call
     } else {
       console.log("IN ADD MODE, CREATE");
       try {
         console.log(distributionPoint)
-        const createdDistributionPoint = await createDistributionPoint('123', distributionPoint);
+        const createdDistributionPoint = await createDistributionPoint(accessToken!, distributionPoint);
         console.log(createdDistributionPoint);
         // TODO: Handle successful creation
       } catch (error) {

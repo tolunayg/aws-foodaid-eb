@@ -136,16 +136,17 @@ function ProductForm() {
       fields,
     };
 
+    const accessToken = localStorage.getItem('token');
+
     if (mode === 'edit' && productId) {
       console.log("IN EDIT MODE, UPDATE");
-      const updatedProduct = await updateProduct('123', productId, product);
+      const updatedProduct = await updateProduct(accessToken!, productId, product);
       console.log(updatedProduct);
       // TODO: Update product and call
     } else {
       console.log("IN ADD MODE, CREATE");
       try {
-        console.log(product)
-        const createdProduct = await createProduct('123', product);
+        const createdProduct = await createProduct(accessToken!, product);
         console.log(createdProduct);
         // TODO: Handle successful creation
       } catch (error) {
