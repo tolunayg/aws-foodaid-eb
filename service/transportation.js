@@ -38,9 +38,9 @@ exports.create = async (transportation) => {
             if (inventory != null && inventory.quantity <= 0) break
 
             if (inventory.quantity < requestItem.quantity) {
-                inventory.quantity = 0
                 requestItem.satisfiedQuantity = requestItem.quantity - inventory.quantity
                 requestItem.unSatisfiedQuantity = requestItem.quantity - requestItem.satisfiedQuantity
+                inventory.quantity = 0
 
                 requestItem.status = demandConstant.inProgressStatus
             }
