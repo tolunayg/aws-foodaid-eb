@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { URLEnum } from '../RouterEnum'
-import { useAuth0 } from "@auth0/auth0-react";
 // import { getUserActiveRole } from '../util'
 
 import './MainLayout.css';

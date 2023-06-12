@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { URLEnum } from '../RouterEnum';
 import { NavLink } from 'react-router-dom';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import './Dashboard.css';
 
 // Import icons

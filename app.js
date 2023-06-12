@@ -5,34 +5,11 @@ const app = express();
 const router = require('./presentation/routes/router');
 const path = require('path');
 const openid = require('express-openid-connect');
-const oauth2 = require('express-oauth2-jwt-bearer');
 const baseUrl = process.env.REACT_APP_BASE_URL
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: 'a long, randomly-generated string stored in env',
-  baseURL: baseUrl,
-  clientID: 'KGW6SDS3zMrecFa5XX3XnJjUoTIszDWu',
-  issuerBaseURL: 'https://fars-metu.eu.auth0.com'
-};
-
-const checkJwt = oauth2.auth({
-  audience: 'https://fars-metu.eu.auth0.com/api/v2/',
-  issuerBaseURL: `https://fars-metu.eu.auth0.com`,
-});
 
 app.use(cors());
 
 app.use(express.json()); // Parse JSON data from requests
-
-app.use(openid.auth(config));
-
-// Middleware to make the `user` object available for all views
-app.use(function (req, res, next) {
-  res.locals.user = req.oidc.user;
-  next();
-});
 
 // app.use('/api', checkJwt, router); // Mount the router middleware at the '/api' path and require authentication
 app.use('/api', router); // Mount the router middleware at the '/api' path and require authentication
@@ -47,8 +24,6 @@ app.get('/logout', (req, res) => {
   })(req, res);
 });
 
-// Serve the index.html file for any other requests
-// app.get('*', openid.requiresAuth(), (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });

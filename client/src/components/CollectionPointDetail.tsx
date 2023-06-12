@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { IGetCollectionPoints } from '../models/IGetCollectionPoints';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import './CollectionPointDetail.css';
 

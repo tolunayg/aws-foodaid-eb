@@ -2,14 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import { getProducts } from '../service'
 import { IGetProducts } from '../models/IGetProducts';
-// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Card, Col, Modal, Nav, Row } from 'react-bootstrap';
 import { Link, NavLink } from "react-router-dom";
 import ProductDetail from '../components/ProductDetail';
 
 function Food() {
   const [productData, setProductData] = useState<IGetProducts[]>()
-  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<IGetProducts>();
   

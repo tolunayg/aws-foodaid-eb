@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import './DistributionPointDetail.css';
 

@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createDistributionPoint, getDistributionPointById, updateDistributionPoint } from '../../service';
@@ -24,7 +23,6 @@ interface CustomField {
 function DistributionPointForm() {
   const navigate = useNavigate()
 
-    // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { state } = useLocation();
     const distributionPointId = state?.distributionPointId;
     const mode:Mode = distributionPointId ? Mode.Edit : Mode.Add;

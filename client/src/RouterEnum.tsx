@@ -4,7 +4,6 @@ export enum URLEnum {
     LOGIN='/login',
     DASHBOARD='/dashboard',
     SETTINGS='/settings',
-    PROFILE='/profile',
     USERS='/users',
     CENTERS='/centers',
     DEMANDS='/demands',

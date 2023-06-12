@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createProduct, getProductById, updateProduct, getProductCategories } from '../../service';
@@ -25,7 +24,6 @@ interface CustomField {
 
 function ProductForm() {
   const navigate = useNavigate()
-  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const { state } = useLocation();
   const productId = state?.productId;
   const mode: Mode = productId ? Mode.Edit : Mode.Add;

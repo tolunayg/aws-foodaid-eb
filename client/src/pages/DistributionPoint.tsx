@@ -2,14 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import { getDistributionPoints } from '../service'
 import { IGetDistributionPoints } from '../models/IGetDistributionPoints';
-// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Card, Col, Modal, Nav, Row } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import DistributionPointDetail from '../components/DistributionPointDetail';
 
 function DistributionPoint() {
   const [distributionPointData, setDistributionPointData] = useState<IGetDistributionPoints[]>()
-  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [selectedDistributionPoint, setSelectedDistributionPoint] = useState<IGetDistributionPoints>();
 

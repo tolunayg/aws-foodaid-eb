@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { getCollectionPoints } from '../service'
 import { IGetCollectionPoints } from '../models/IGetCollectionPoints';
-// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Card, Col, Modal, Nav, Row } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import CollectionPointDetail from '../components/CollectionPointDetail';

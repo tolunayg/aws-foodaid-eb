@@ -1,19 +1,18 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { Button, Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createCollectionPoint, getCollectionPointById, updateCollectionPoint } from '../../service';
 import { URLEnum } from '../../RouterEnum';
 
 enum Mode {
-    Add = 'add',
-    Edit = 'edit'
+  Add = 'add',
+  Edit = 'edit'
 }
 
 type Props = {
-    mode: Mode;
-  };
+  mode: Mode;
+};
 
 interface CustomField {
   name: string;
@@ -23,10 +22,9 @@ interface CustomField {
 function CollectionPointForm() {
   const navigate = useNavigate()
 
-    // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-    const { state } = useLocation();
-    const collectionPointId = state?.collectionPointId;
-    const mode:Mode = collectionPointId ? Mode.Edit : Mode.Add;
+  const { state } = useLocation();
+  const collectionPointId = state?.collectionPointId;
+  const mode: Mode = collectionPointId ? Mode.Edit : Mode.Add;
   const [customFields, setCustomFields] = useState<CustomField[]>([]);
   const formik = useFormik({
     initialValues: {
@@ -36,53 +34,53 @@ function CollectionPointForm() {
       address: '',
     },
     onSubmit: (values) => {
-        const customFieldsObj: Record<string, string> = {};
-        customFields.forEach((customField) => {
-          customFieldsObj[customField.name] = customField.value;
-        });
-        const newValues = { ...values, customFields: customFieldsObj };
-        console.log(newValues);
-        navigate(URLEnum.COLLECTION_POINT);
-      },
-      
+      const customFieldsObj: Record<string, string> = {};
+      customFields.forEach((customField) => {
+        customFieldsObj[customField.name] = customField.value;
+      });
+      const newValues = { ...values, customFields: customFieldsObj };
+      console.log(newValues);
+      navigate(URLEnum.COLLECTION_POINT);
+    },
+
   });
 
 
   useEffect(() => {
     // Set the initial values
     if (mode === 'edit' && collectionPointId) {
-        const fetchData = async () => {
+      const fetchData = async () => {
 
         try {
-            // const accessToken = await getAccessTokenSilently();
-            const accessToken = localStorage.getItem('token');
+          // const accessToken = await getAccessTokenSilently();
+          const accessToken = localStorage.getItem('token');
 
-            const data = await getCollectionPointById(accessToken!, collectionPointId);
-            console.log(data);
-            // Set form values from data
-            const updatedInitialValues = {
-              city: data.city,
-              district: data.district,
-              collectionPointName: data.collectionPointName,
-              address: data.address,
-            };
-            // Set the form values from the updated initial values
-            formik.setValues(updatedInitialValues);
+          const data = await getCollectionPointById(accessToken!, collectionPointId);
+          console.log(data);
+          // Set form values from data
+          const updatedInitialValues = {
+            city: data.city,
+            district: data.district,
+            collectionPointName: data.collectionPointName,
+            address: data.address,
+          };
+          // Set the form values from the updated initial values
+          formik.setValues(updatedInitialValues);
 
 
-            // Create a new object with the custom field names and their values
-            const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, value: String(value) }));
-            console.log(customFieldsData);
-            setCustomFields(customFieldsData);
+          // Create a new object with the custom field names and their values
+          const customFieldsData = Object.entries(data.fields).map(([name, value]) => ({ name, value: String(value) }));
+          console.log(customFieldsData);
+          setCustomFields(customFieldsData);
 
         } catch (error) {
-            console.error(error);
+          console.error(error);
         }
-        };
-        fetchData();
+      };
+      fetchData();
     }
-}, [mode, collectionPointId]);
- 
+  }, [mode, collectionPointId]);
+
 
   const handleAddCustomField = () => {
     setCustomFields([...customFields, { name: '', value: '' }]);
@@ -93,13 +91,13 @@ function CollectionPointForm() {
     const fields = Object.fromEntries(customFields.map(customField => [customField.name, customField.value]));
 
     const collectionPoint = {
-      city, 
-      district, 
-      collectionPointName, 
+      city,
+      district,
+      collectionPointName,
       address,
       fields,
     };
-  
+
     if (mode === 'edit' && collectionPointName) {
       console.log("IN EDIT MODE, UPDATE");
       const updatedCollectionPoint = await updateCollectionPoint('123', collectionPointId, collectionPoint);
@@ -115,7 +113,7 @@ function CollectionPointForm() {
       }
     }
   };
-  
+
 
   const handleCustomFieldNameChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newCustomFields = [...customFields];
@@ -133,15 +131,15 @@ function CollectionPointForm() {
     formik.resetForm();
     setCustomFields([]);
   };
-  
+
   const headingText = mode === Mode.Add ? 'Add New Collection Point' : 'Edit Collection Point';
-  
+
   return (
 
     <>
       <h1 className="display-4">{headingText}</h1>
       <Form onSubmit={formik.handleSubmit}>
-      <Form.Group className="mb-3">
+        <Form.Group className="mb-3">
           <Form.Label>City</Form.Label>
           <Form.Control type="text" id="city" name="city" value={formik.values.city} onChange={formik.handleChange} />
         </Form.Group>
@@ -155,7 +153,7 @@ function CollectionPointForm() {
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" id="collectionPointName" name="collectionPointName" value={formik.values.collectionPointName} onChange={formik.handleChange} />
         </Form.Group>
-        
+
         <Form.Group className="mb-3">
           <Form.Label>Address</Form.Label>
           <Form.Control type="text" id="address" name="address" value={formik.values.address} onChange={formik.handleChange} />

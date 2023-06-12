@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { IGetProducts } from '../models/IGetProducts';
 import { IGetProductCategory } from '../models/IGetProductCategories';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import { useNavigate } from 'react-router-dom';
 import { URLEnum } from '../RouterEnum';
 import { getProductCategoryById } from '../service';
