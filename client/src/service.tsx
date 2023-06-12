@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { IGetProducts } from "./models/IGetProducts";
 import { IGetInventories } from "./models/IGetInventories";
-// const baseUrl = process.env.REACT_APP_BASE_URL
-const baseUrl = "http://localhost:5000"
+const baseUrl = process.env.REACT_APP_BASE_URL
+// const baseUrl = "http://localhost:5000"
 
 const config = axios.create({
   baseURL: baseUrl,
