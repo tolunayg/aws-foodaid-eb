@@ -20,10 +20,14 @@ function DemandForm() {
   const [distributionPoints, setDistributionPoints] = useState<IGetDistributionPoints[]>([]);
   const [products, setProducts] = useState<IGetProducts[]>([]);
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
   const formik = useFormik({
     initialValues: {
       distributionPointId: '',
       requestItems: [{ product: '', quantity: 0, customFields: {} }],
+      createdBy: user.user_id, // Set createdBy to user_id
+      lastModifiedBy: user.user_id, // Set lastModifiedBy to user_id
     },
     onSubmit: async (values) => {
       try {
@@ -41,8 +45,8 @@ function DemandForm() {
           ...values,
           creationDate,
           lastModifiedDate,
-          createdBy: 1,
-          lastModifiedBy: 1
+          createdBy: user.user_id, // Set createdBy to user_id
+          lastModifiedBy: user.user_id, // Set lastModifiedBy to user_id
         };
     
         const response = await createDemand(accessToken!, dataToSend);

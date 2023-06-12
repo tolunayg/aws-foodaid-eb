@@ -39,8 +39,9 @@ export const getProducts = async (accessToken: string) => {
   try {
     const response = await config.get('/api/products', { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -55,8 +56,9 @@ export const getProductById = async (accessToken: string, productId: string) => 
     const response = await config.get(`/api/products/${productId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -70,8 +72,9 @@ export const createProduct = async (accessToken: string, product: {}) => {
   try {
     const response = await config.post('/api/products', product, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -85,8 +88,9 @@ export const updateProduct = async (accessToken: string, productId: number, prod
   try {
     const response = await config.put(`/api/products/${productId}`, product, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -100,8 +104,9 @@ export const getDemands = async (accessToken: string) => {
   try {
     const response = await config.get('/api/demands', { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -116,8 +121,9 @@ export const getDemandById = async (accessToken: string, demandId: number) => {
     const response = await config.get(`/api/demands/${demandId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -131,8 +137,9 @@ export const createDemand = async (accessToken: string, demand: {}) => {
   try {
     const response = await config.post('/api/demands', demand, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -146,8 +153,9 @@ export const getProductCategories = async (accessToken: string) => {
   try {
     const response = await config.get('/api/product-categories', { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -162,8 +170,9 @@ export const getProductCategoryById = async (accessToken: string, productCategor
     const response = await config.get(`/api/product-categories/${productCategoryId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -178,8 +187,9 @@ export const getDistributionPoints = async (accessToken: string) => {
   try {
     const response = await config.get('/api/distribution-points', { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -194,8 +204,9 @@ export const getDistributionPointById = async (accessToken: string, distribution
     const response = await config.get(`/api/distribution-points/${distributionPointId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -209,8 +220,9 @@ export const createDistributionPoint = async (accessToken: string, distributionP
   try {
     const response = await config.post('/api/distribution-points', distributionPoint, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -224,8 +236,9 @@ export const updateDistributionPoint = async (accessToken: string, distributionP
   try {
     const response = await config.put(`/api/distribution-points/${distributionPointId}`, distributionPoint, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -240,8 +253,9 @@ export const getInventory = async (accessToken: string) => {
   try {
     const response = await config.get('/api/inventories', { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -255,8 +269,9 @@ export const addInventory = async (accessToken: string, inventory: {}) => {
   try {
     const response = await config.post('/api/inventories', inventory, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -273,8 +288,9 @@ export const getCollectionPoints = async (accessToken: string) => {
     return response.data;
 
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -290,8 +306,9 @@ export const getCollectionPointById = async (accessToken: string, collectionPoin
     const response = await config.get(`/api/collection-points/${collectionPointId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -305,8 +322,9 @@ export const createCollectionPoint = async (accessToken: string, collectionPoint
   try {
     const response = await config.post('/api/collection-points', collectionPoint, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -320,8 +338,9 @@ export const updateCollectionPoint = async (accessToken: string, collectionPoint
   try {
     const response = await config.put(`/api/collection-points/${collectionPointId}`, collectionPoint, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -337,8 +356,9 @@ export const getTransportations = async (accessToken: string) => {
     const response = await config.get('/api/transportations', { headers });
     return response.data;
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -352,8 +372,9 @@ export const createTransportation = async (accessToken: string, transportation: 
   try {
     const response = await config.post('/api/transportations', transportation, { headers });
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -368,8 +389,9 @@ export const approveTransportationById = async (accessToken: string, transportat
     const response = await config.patch(`/api/transportations/${transportationId}/approve`, {}, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -386,8 +408,9 @@ export const getUsers = async (accessToken: string) => {
     return response.data;
 
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }
@@ -402,8 +425,9 @@ export const getUserById = async (accessToken: string, userId: number) => {
     const response = await config.get(`/api/users/${userId}`, { headers });
 
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    window.alert(error.message);
     throw error;
   }
 }

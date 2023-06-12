@@ -135,8 +135,9 @@ function OpenDemandDetail() {
       navigate(URLEnum.OPEN_DEMANDS)
   
       // Perform any additional actions upon successful creation of transportation
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error('Error:', error.message);
+      // window.alert(error.message);
     }
   };
   

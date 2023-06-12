@@ -86,7 +86,18 @@ function Transportation() {
   };
 
   const formatDate = (date: Date) => {
-    return new Date(date).toLocaleString();
+    const formattedDate = new Date(date).toLocaleString();
+    return formattedDate !== "Invalid Date" ? formattedDate : <i className="fa fa-truck" aria-hidden="true"></i>;
+  };
+  
+  const formatId = (id: string) => {
+    if (id.length < 9) {
+      return id; // Return the original ID if it is shorter than 9 characters
+    }
+  
+    const lastNineCharacters = id.substr(id.length - 9);
+    const formattedId = `${lastNineCharacters.substr(0, 3)} ${lastNineCharacters.substr(3, 3)} ${lastNineCharacters.substr(6, 3)}`;
+    return formattedId;
   };
 
   const handleApproveClick = (transportationId: string) => {
@@ -170,7 +181,7 @@ function Transportation() {
         <tbody>
           {filteredTransportations.map((transportation) => {
             const user = users[transportation.approvedUser];
-            const userName = user ? `${user.firstName} ${user.lastName}` : transportation.approvedUser;
+            const userName = user ? `${user.firstName} ${user.lastName}` : "-";
             const collectionPoint = collectionPoints[transportation.collectionPointId];
             const collectionPointName = collectionPoint ? collectionPoint.collectionPointName : transportation.collectionPointId;
             const distributionPoint = distributionPoints[transportation.distributionPointId];
@@ -180,7 +191,7 @@ function Transportation() {
               <tr key={transportation._id}>
                 <td>{transportation.vehicleType}</td>
                 <td>{transportation.vehiclePlate}</td>
-                <td>{transportation.demandId}</td>
+                <td>{formatId(transportation.demandId)}</td>
                 <td>{collectionPointName}</td>
                 <td>{distributionPointName}</td>
                 <td>{formatDate(transportation.loadingDate)}</td>
@@ -188,9 +199,11 @@ function Transportation() {
                 <td>{userName}</td>
                 {roles.includes('distribution-staff') && (
                   <td>
-                    <Button variant="primary" onClick={() => handleApproveClick(transportation._id)}>
+                  {new Date(transportation.arrivingDate).toLocaleString() === "Invalid Date" && (
+                    <Button variant="success btn-sm" onClick={() => handleApproveClick(transportation._id)}>
                       Approve
                     </Button>
+                  )}
                   </td>
                 )}
 

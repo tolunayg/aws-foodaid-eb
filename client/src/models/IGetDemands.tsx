@@ -2,9 +2,9 @@ export interface IGetDemands {
     _id:                 string;
     distributionPointId: string;
     creationDate:        Date;
-    createdBy:           number;
+    createdBy:           string;
     lastModifiedDate:    Date;
-    lastModifiedBy:      number;
+    lastModifiedBy:      string;
     requestItems:        RequestItem[];
 }
 
