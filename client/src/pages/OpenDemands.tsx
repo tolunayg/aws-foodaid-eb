@@ -45,6 +45,10 @@ function OpenDemands() {
     setSelectedDistributionPointId(value === '' ? null : value);
   };
 
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleString();
+  };
+
   const handleDemandClick = (demand: IGetDemands) => {
     setSelectedDemand(demand);
     setShowModal(true);
@@ -106,9 +110,9 @@ function OpenDemands() {
               <tr key={demand._id} onClick={() => handleDemandClick(demand)}>
                 <td>{demand._id}</td>
                 <td>{distributionPoint ? distributionPoint.distributionPointName : ''}</td>
-                <td>{demand.creationDate.toLocaleString()}</td>
+                <td>{formatDate(demand.creationDate)}</td>
                 <td>{demand.createdBy}</td>
-                <td>{demand.lastModifiedDate.toLocaleString()}</td>
+                <td>{formatDate(demand.lastModifiedDate)}</td>
                 <td>{demand.lastModifiedBy}</td>
                 <td>{getStatus(demand)}</td> {/* Render the Status */}
               </tr>
