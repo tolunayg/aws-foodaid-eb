@@ -20,7 +20,7 @@ router.use('/product-categories', authMiddleware(["management-staff"]), productC
 router.use('/demands', demandRoutes);
 router.use('/inventories', inventoryRoutes);
 router.use('/collection-points', authMiddleware(["management-staff"]), collectionPointsRoutes);
-router.use('/users', authMiddleware(["admin"]), usersRoutes);
+router.use('/users', usersRoutes);
 router.use('/transportations', transportationRoutes);
 router.use('/auth', authRoutes);
 

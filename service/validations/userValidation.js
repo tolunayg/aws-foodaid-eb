@@ -11,7 +11,7 @@ exports.isExist = async (entity) => {
 
 exports.isUsernameDuplicated = async (entity) => {
     if (entity) {
-        let error = new Error(`Username is using by another user.`)
+        let error = new Error(`Username is used by another user.`)
         error.name = "UsernameInUse"
         error.statusCode = 400
         error.isBusinessException = true
