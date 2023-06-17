@@ -2,6 +2,7 @@ export enum URLEnum {
     BASE='/',
     HOME='/home',
     LOGIN='/login',
+    SIGNUP='/signup',
     DASHBOARD='/dashboard',
     SETTINGS='/settings',
     USERS='/users',

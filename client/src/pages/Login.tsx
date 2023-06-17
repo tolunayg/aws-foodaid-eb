@@ -17,6 +17,11 @@ function Login() {
 
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Function to handle the sign-up button click
+  const handleSignupClick = () => {
+    navigate(URLEnum.SIGNUP);
+  };
+
   const userLogin = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -111,7 +116,12 @@ function Login() {
           </div>
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Login
+            </button>
+          </div>
+          <div className="d-grid  mt-3">
+            <button type="button" className="btn btn-success" onClick={handleSignupClick}>
+              Sign up
             </button>
           </div>
         </form>

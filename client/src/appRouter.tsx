@@ -26,12 +26,14 @@ import OpenDemandDetail from "./pages/OpenDemandDetail";
 import CollectionPoint from "./pages/CollectionPoint";
 import CollectionPointForm from "./pages/forms/CollectionPointForm";
 import Transportation from "./pages/Transportation";
+import Signup from "./pages/Signup";
 
 export const routes =
 <BrowserRouter>
     <Routes>
         <Route path = {URLEnum.BASE} element={<Home/>}/>
         <Route path = {URLEnum.LOGIN} element={<Login/>}/>
+        <Route path = {URLEnum.SIGNUP} element={<Signup/>}/>
         <Route path = {URLEnum.HOME} element={ <MainLayout component={<Home />} /> } />
         <Route path = {URLEnum.DASHBOARD} element={ <MainLayout component={<Dashboard />} /> } />
         <Route path = {URLEnum.SETTINGS} element={ <MainLayout component={<Settings />} /> } />

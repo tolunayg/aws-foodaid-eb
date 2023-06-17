@@ -431,3 +431,20 @@ export const getUserById = async (accessToken: string, userId: number) => {
     throw error;
   }
 }
+
+// add user
+export const addUser = async (accessToken: string, user: {}) => {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  try {
+    const response = await config.post('/api/users', user, { headers });
+    return response.data;
+  } catch (error: any) {
+    console.error('Error:', error.message);
+    const errorMessage = error.response?.data?.message || 'An error occurred';
+    window.alert(errorMessage);
+    throw error;
+  }
+}
